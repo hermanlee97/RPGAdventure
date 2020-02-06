@@ -2,6 +2,6 @@
 using namespace std;
 
 int main() {
-    cout << "Hi" << endl;
+    //test map by making a simple 2x2
     return 0;
 }
