@@ -8,6 +8,7 @@ class Entity
 public:
     int hp;
     int damage;
+    int xp;
     int defence;
     int gold;
 };
@@ -15,6 +16,8 @@ public:
 class Player : public Entity
 {
 public:
+    int x;
+    int y;
     int combat(Entity player, Entity enemy)
     {
         int pHP = player.hp;
