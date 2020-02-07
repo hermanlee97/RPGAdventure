@@ -1,6 +1,8 @@
 #include <iostream>
+#include <string>
 #include <windows.h>
 
+// #### Entities Class ####
 class Entity
 {
 public:
@@ -63,4 +65,33 @@ public:
 
 class Enemy : public Entity
 {
+};
+
+// #### Items Class ####
+
+class Item
+{
+public:
+    std::string myname;
+};
+
+class Consumable : public Item
+{
+public:
+    int Consume()
+    {
+        return 0;
+    }
+};
+
+class Equipment : public Item
+{
+public:
+    void equip()
+    {
+    }
+
+    void unequip()
+    {
+    }
 };
