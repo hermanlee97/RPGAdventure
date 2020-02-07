@@ -22,7 +22,7 @@ int main()
     while (true)
     {
 
-        // ## 1. World Change.  (New area/block loaded. Display the stuff on the screen.) ##
+        // ## 1. World Change.  (New area/block loaded. Display the stuff onto the screen.) ##
         cout << "       Meadow" << endl;
         cout << "    X: " << xPos << " Y: " << yPos << endl;
 
