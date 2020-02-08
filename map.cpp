@@ -47,7 +47,6 @@ void Map::make_map(string map_name){
 
 
 int main() {
-    vector<Block> world_map;
     Map map1;
     map1.make_map("map_01");
     return 0;
