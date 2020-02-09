@@ -74,5 +74,6 @@ int main() {
     Map map1;
     map1.make_map("map_02");
     map1.print_map();
+    cout<<"test"<<endl;
     return 0;
 }
