@@ -14,10 +14,10 @@ int str_to_int(string s){
 }
 
 bool str_to_bool(string s){
-    stringstream temp(s);
-    bool x = false;
-    temp >> x;
-    return x;
+    if (s == "true "){
+        return true;
+    }
+    return false;
 }
 
 void Map::make_map(string map_name){
@@ -30,19 +30,11 @@ void Map::make_map(string map_name){
         string d = line.substr(10,5);
         string e = line.substr(16,5);
 
-        cout << c << endl;
-
         int x_coor = str_to_int(a);
         int y_coor = str_to_int(b);
         bool walkable = str_to_bool(c);
         bool npc = str_to_bool(d);
         bool enemy = str_to_bool(e);
-
-        // cout << x_coor << endl;
-        // cout <<  y_coor << endl;
-        // cout << walkable << endl;
-        // cout << npc << endl;
-        // cout << enemy << endl;
 
         content.push_back(Block(x_coor, y_coor, walkable, npc, enemy));
 
@@ -54,19 +46,12 @@ void Map::print_map(){
     string m;
     for (int i = 0; i < content.size(); i++)
     {
-        // cout << i << endl;
         // Block temp = content[i];
         int x = content[i].get_x_coor();
         int y = content[i].get_y_coor();
         bool walkable = content[i].get_walkable();
 
-        // cout << content[i].get_x_coor() << endl;
-        // cout << content[i].get_y_coor() << endl;
-        // cout << temp.get_walkable() << endl;
-        // cout << temp.get_has_npc() << endl;
-        // cout << temp.get_has_enemy() << endl;
-        cout << walkable << endl;
-        if(walkable == 0){
+        if(walkable){
             m.append("o ");
             continue;
         }else{
@@ -88,6 +73,6 @@ void Map::print_map(){
 int main() {
     Map map1;
     map1.make_map("map_02");
-    // map1.print_map();
+    map1.print_map();
     return 0;
 }
