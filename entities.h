@@ -70,6 +70,10 @@ class Enemy : public Entity
 {
 };
 
+class NPC : public Entity
+{
+};
+
 // #### Items Class ####
 
 class Item
