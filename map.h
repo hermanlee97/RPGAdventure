@@ -23,7 +23,7 @@ class Block{
         // bool get_has_player(){return has_player;}
 
         void set_x_coor(int x){x_coordinate = x;}
-        void set_y_coor(int y){x_coordinate = y;}
+        void set_y_coor(int y){y_coordinate = y;}
         void set_walkable(bool w){walkable = w;}
         void set_has_npc(bool n){has_npc = n;}
         void set_has_enemy(bool e){has_enemy = e;}
