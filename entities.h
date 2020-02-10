@@ -23,18 +23,22 @@ public:
         if(inputMove == 'L')
         {
             player.x -= 1;
+            return player.x;
         }
         else if(inputMove == 'R')
         {
             player.x += 1;
+            return player.x;
         }
         else if(inputMove = 'U')
         {
             player.y += 1;
+            return player.y;
         }
         else if(inputMove = 'D')
         {
             player.y -= 1;
+            return player.y;
         }
     }
 };
