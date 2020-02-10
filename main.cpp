@@ -4,8 +4,7 @@
 using namespace std;
 
 // ## Personal header(.h) files ##
-// {replace}
-// {replace}
+#include "entities.h"
 
 //  ##################    MAIN FUNCTION       ###############
 int main()

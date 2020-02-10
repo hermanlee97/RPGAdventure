@@ -123,3 +123,9 @@ public:
     {
     }
 };
+
+// #### MAP ####
+class Map
+{
+public:
+};
