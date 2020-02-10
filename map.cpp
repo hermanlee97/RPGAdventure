@@ -20,6 +20,53 @@ bool str_to_bool(string s){
     return false;
 }
 
+bool is_current_row(string text,int current_row){
+    int row= stoi(text);
+    if(row==current_row){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+void Map::make_map(string map_name){
+    ifstream map_file(map_name);
+    string line;
+    int current_row=0;
+    vector< vector <Block>> matrix;
+    vector<Block>row;
+    while(getline(map_file,line)){
+        if(is_current_row(line.substr(0,1),current_row)){
+
+            string c = line.substr(4,5);
+            string d = line.substr(10,5);
+            string e = line.substr(16,5);
+            
+            bool walkable = str_to_bool(c);
+            bool npc = str_to_bool(d);
+            bool enemy = str_to_bool(e);            
+
+            row.push_back(Block(0,0,walkable, npc, enemy));            
+        }else{
+            matrix.push_back(row);
+            row.clear();
+            current_row++;
+            
+            string c = line.substr(4,5);
+            string d = line.substr(10,5);
+            string e = line.substr(16,5);
+            
+            bool walkable = str_to_bool(c);
+            bool npc = str_to_bool(d);
+            bool enemy = str_to_bool(e);            
+
+            row.push_back(Block(0,0,walkable, npc, enemy));
+            
+
+        }
+    }
+}
+/*
 void Map::make_map(string map_name){
     ifstream map_file(map_name);
     string line;
@@ -39,9 +86,16 @@ void Map::make_map(string map_name){
         content.push_back(Block(x_coor, y_coor, walkable, npc, enemy));
 
     }
-}
-
+}*/
 void Map::print_map(){
+    for(int i=0;i<matrix.size();i++){
+        for(int j=0;j<matrix[i].size();j++){
+            
+        }
+    }
+    
+}
+/*void Map::print_map(){
     int counter=0;
     string m;
     for (int i = 0; i < content.size(); i++)
@@ -65,10 +119,9 @@ void Map::print_map(){
         }
 
     }
-    cout << m << endl;
-    
+    cout << m << endl;    
 }
-
+*/
 
 int main() {
     Map map1;

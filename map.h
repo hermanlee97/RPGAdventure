@@ -43,6 +43,7 @@ class Block{
 class Map {
     private:
         vector<Block> content;
+        vector<vector<Block>> matrix;
         
     public:
         //generate map
