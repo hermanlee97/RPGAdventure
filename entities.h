@@ -2,7 +2,7 @@
 #include <string>
 #include <windows.h>
 
-// #### Entities Class ####
+// #### Entites Class ####
 class Entity
 {
 public:
@@ -16,8 +16,9 @@ public:
 class Player : public Entity
 {
 public:
-    int x;
+    int x;      // What's the point of these variables?
     int y;
+
     int combat(Entity player, Entity enemy)
     {
         int pHP = player.hp;
@@ -63,6 +64,26 @@ public:
         }
 
         return pHP;
+    }
+
+    int receiveXP(Entity player, Entity enemy)
+    {
+        int pXP = player.xp;
+        int eXP = enemy.xp;
+
+        pXP += eXP;
+
+        return pXP;
+    }
+
+    int receiveGold(Entity player, Entity enemy)
+    {
+        int pGold = player.gold;
+        int eGold = enemy.gold;
+
+        pGold += eGold;
+
+        return pGold;
     }
 };
 
