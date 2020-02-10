@@ -11,13 +11,13 @@ public:
     int xp;
     int defence;
     int gold;
+    int x;  // X and Y should be for all entities, plus I can't reference x and y in the player subclass with the move function
+    int y;
 };
 
 class Player : public Entity
 {
 public:
-    int x;      // What's the point of these variables?
-    int y;
 
     int combat(Entity player, Entity enemy)
     {
@@ -66,24 +66,24 @@ public:
         return pHP;
     }
 
-    int receiveXP(Entity player, Entity enemy)
+    int move(Entity player, char inputMove)
     {
-        int pXP = player.xp;
-        int eXP = enemy.xp;
-
-        pXP += eXP;
-
-        return pXP;
-    }
-
-    int receiveGold(Entity player, Entity enemy)
-    {
-        int pGold = player.gold;
-        int eGold = enemy.gold;
-
-        pGold += eGold;
-
-        return pGold;
+        if(inputMove == 'L')
+        {
+            player.x -= 1;
+        }
+        else if(inputMove == 'R')
+        {
+            player.x += 1;
+        }
+        else if(inputMove = 'U')
+        {
+            player.y += 1;
+        }
+        else if(inputMove = 'D')
+        {
+            player.y -= 1;
+        }
     }
 };
 
