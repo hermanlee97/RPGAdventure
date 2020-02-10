@@ -11,34 +11,36 @@ public:
     int xp;
     int defence;
     int gold;
-    int x;  // X and Y should be for all entities, plus I can't reference x and y in the player subclass with the move function
-    int y;
+
 };
 
 class Player : public Entity
 {
 public:
+    int x;
+    int y;
+
     int move(Entity player, char inputMove)
     {
         if(inputMove == 'L')
         {
-            player.x -= 1;
-            return player.x;
+            x -= 1;
+            return x;
         }
         else if(inputMove == 'R')
         {
-            player.x += 1;
-            return player.x;
+            x += 1;
+            return x;
         }
         else if(inputMove = 'U')
         {
-            player.y += 1;
-            return player.y;
+            y += 1;
+            return y;
         }
         else if(inputMove = 'D')
         {
-            player.y -= 1;
-            return player.y;
+            y -= 1;
+            return y;
         }
     }
 };
