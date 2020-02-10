@@ -41,10 +41,8 @@ class Block{
 
 
 class Map {
-    private:
-        vector<Block> content;
-        
     public:
+        vector<vector<Block>> content;
         //generate map
         void make_map(string map_name);
 
