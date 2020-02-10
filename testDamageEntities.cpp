@@ -1,7 +1,10 @@
 #include <iostream>
 #include <windows.h>
 
+// Include our FUNCTION files.
 #include "entities.h"
+#include "combat.h"
+#include "flight.h"
 
 int main()
 {
@@ -21,8 +24,11 @@ int main()
     enemy.defence = 5;
     enemy.damage = 10;
 
-    // Call the COMBAT method on player.
-    player.hp = player.combat(player, enemy);
+    // COMBAT function.
+    player.hp = combat(player, enemy);
+
+    // FLIGHT function.
+    // player.hp = flight(player, enemy);
 
     // Print the result.
     std::cout << player.hp << std::endl;
