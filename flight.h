@@ -1,11 +1,9 @@
 #include "entities.h"
 
-int flight(Entity player, Entity enemy)
+void flight(Entity player, Entity enemy)
 {
-    int playerHP;
-
     // Since you're running take some damage. (Later loose some coins too.)
-    playerHP = player.hp - enemy.damage;
+    player.hp = player.hp - enemy.damage;
+    // player.gold = player.gold-(player.gold/100);
 
-    return playerHP;
 }
