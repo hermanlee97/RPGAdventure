@@ -1,0 +1,32 @@
+#include <iostream>
+
+using namespace std;
+
+int option;
+
+int main ()
+
+{
+    cout<<"Menu"<<endl;
+    cout<<"option 1- Start Game"<<endl;
+    cout<<"Option 2-Quit Game"<<endl;
+    cout<<"Option 3- Resume Game"<<endl;
+    cin>>option
+    if (option ==1)
+    {
+	system("cls");
+        cout<<"Start Game"<<endl;	
+    }
+
+    if (option ==2)
+    {
+	system("cls");
+        cout<<"Quit Game"<<endl;	
+    }
+
+     if (option ==3)
+    {
+	system("cls");
+        cout<<"Resume Game"<<endl;	
+    }
+}
