@@ -5,7 +5,7 @@ using namespace std;
 
 // ## Personal header(.h) files ##
 #include "entities.h"
-#include "combat.h"
+#include "combat.cpp"
 
 //  ##################    MAIN FUNCTION       ###############
 int main()

@@ -13,7 +13,7 @@ int combat(Player player, Enemy enemy)
         std::cout << "Your HP: " << pHP << "\nEnemy HP: " << nHP << "\n 1. Fight\n 2. Flee" << std::endl;
         std::cin >> choice;
 
-        if(choice == 1)
+        if (choice == 1)
         {
             // DEAL DAMAGE TO ENEMY
             if ((enemy.defence - player.damage) < 0)
@@ -69,7 +69,7 @@ int combat(Player player, Enemy enemy)
                 return 0;
             }
         }
-        else if(choice == 2)
+        else if (choice == 2)
         {
             system("CLS");
             // Since you're running take some damage. (Later loose some coins too.)
@@ -80,7 +80,7 @@ int combat(Player player, Enemy enemy)
             return pHP, player.moveX("L");
         }
 
-        else 
+        else
         {
             system("CLS");
             std::cout << "Not a valid option." << std::endl;
