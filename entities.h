@@ -50,6 +50,17 @@ public:
             return y;
         }
     }
+
+    Player(int a, int b, int c, int d, int e, int f)
+    {
+        hp = a;         // 10 for testing
+        gold = b;       // 0 for testing
+        damage = c;     // 5 for testing
+        defence = d;    // 2 for testing
+
+        x = e;          // 3 for testing
+        y = f;          // 3 for testing
+    }
 };
 
 class Enemy : public Entity
@@ -57,6 +68,16 @@ class Enemy : public Entity
 public:
     int x;
     int y;
+
+    Enemy(int a, int b, int c, int d, int e)
+    {
+        hp = a;         // 5 for testing
+        damage = b;     // 3 for testing
+        defence = c;    // 1 for testing
+
+        x = d;          // 4 for tesing
+        y = e;          // 4 for testing
+    }
 };
 
 class NPC : public Entity

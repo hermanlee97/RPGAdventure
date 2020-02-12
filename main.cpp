@@ -10,25 +10,8 @@ using namespace std;
 //  ##################    MAIN FUNCTION       ###############
 int main()
 {
-    Player player;
-    Enemy enemy;
-
-    // Initialise player stats.
-    player.hp = 10;
-    player.gold = 0;
-    player.damage = 5;
-    player.defence = 2;
-
-    player.x = 3;
-    player.y = 3;
-
-    // Test enemy stats.
-    enemy.hp = 5;
-    enemy.damage = 3;
-    enemy.defence = 1;
-
-    enemy.x = 4;
-    enemy.y = 4;
+    Player player(10, 0, 5, 2, 3, 3);
+    Enemy enemy(5, 3, 1, 4, 4);
 
     // ON START (Load/NewGame functions)
     std::string choice;
