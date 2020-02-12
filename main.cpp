@@ -17,7 +17,7 @@ int main()
 
     // Starting position
     player.x = 3;
-    player.y= 3;
+    player.y = 3;
 
     // ON UPDATE
     while (true)
@@ -25,7 +25,7 @@ int main()
 
         // ## 1. World Change.  (New area/block loaded. Display the stuff onto the screen.) ##
         cout << "       Meadow" << endl;
-        cout << "    X: " << player.getX << " Y: " << player.getY << endl;
+        cout << "    X: " << player.x << " Y: " << player.y << endl;
 
         // ## 2. Event Presented. (Fight/Loot functions) ##
         // {replace}

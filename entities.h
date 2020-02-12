@@ -1,3 +1,6 @@
+#ifndef ENTITIES_H
+#define ENTITIES_H
+
 #include <iostream>
 #include <string>
 #include <windows.h>
@@ -11,31 +14,6 @@ public:
     int damage;
     int defence;
     int gold;
-
-    int getHP()
-    {
-        return hp;
-    }
-
-    int getXP()
-    {
-        return xp;
-    }
-
-    int getDamage()
-    {
-        return damage;
-    }
-
-    int getDefence()
-    {
-        return defence;
-    }
-
-    int getGold()
-    {
-        return gold;
-    }
 };
 
 class Player : public Entity
@@ -121,3 +99,5 @@ class Map
 {
 public:
 };
+
+#endif
