@@ -1,3 +1,6 @@
+#ifndef ENTITIES_H
+#define ENTITIES_H
+
 #include <iostream>
 #include <string>
 #include <windows.h>
@@ -9,8 +12,8 @@ class Entity
 {
 public:
     int hp;
-    int damage;
     int xp;
+    int damage;
     int defence;
     int gold;
 };
@@ -21,24 +24,38 @@ public:
     int x;
     int y;
 
-    int receiveXP(Entity player, Entity enemy)
+    int getX()
     {
-        int pXP = player.xp;
-        int eXP = enemy.xp;
-
-        pXP += eXP;
-
-        return pXP;
+        return x;
     }
 
-    int receiveGold(Entity player, Entity enemy)
+    int getY()
     {
-        int pGold = player.gold;
-        int eGold = enemy.gold;
+        return y;
+    }
 
-        pGold += eGold;
-
-        return pGold;
+    int move(string inputMove)
+    {
+        if (inputMove == "L")
+        {
+            x -= 1;
+            return x;
+        }
+        else if (inputMove == "R")
+        {
+            x += 1;
+            return x;
+        }
+        else if (inputMove == "U")
+        {
+            y += 1;
+            return y;
+        }
+        else if (inputMove == "D")
+        {
+            y -= 1;
+            return y;
+        }
     }
 };
 
@@ -115,7 +132,7 @@ public:
         display = useDisplay;
     }
 
-    std::string getDisplay()
+    string getDisplay()
     {
         return display;
     }
@@ -124,3 +141,5 @@ public:
 class Block : public Map
 {
 };
+
+#endif

@@ -1,9 +1,14 @@
 int flight(Player player, Enemy enemy)
 {
-    int playerHP;
+    int fHP;
 
     // Since you're running take some damage. (Later loose some coins too.)
-    playerHP = player.hp - enemy.damage;
+    fHP = player.hp - enemy.damage;
 
-    return playerHP;
+    // Display Message.
+    std::cout << "\nThe enemy dealt " << enemy.damage - player.defence << " damage to you!" << std::endl;
+
+    // player.gold = player.gold-(player.gold/100);
+
+    return fHP;
 }

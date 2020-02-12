@@ -13,9 +13,11 @@ int main()
     // {replace}
     system("CLS");
 
+    Player player;
+
     // Starting position
-    int xPos = 3;
-    int yPos = 3;
+    player.x = 3;
+    player.y = 3;
 
     // ON UPDATE
     while (true)
@@ -23,7 +25,7 @@ int main()
 
         // ## 1. World Change.  (New area/block loaded. Display the stuff onto the screen.) ##
         cout << "       Meadow" << endl;
-        cout << "    X: " << xPos << " Y: " << yPos << endl;
+        cout << "    X: " << player.x << " Y: " << player.y << endl;
 
         // ## 2. Event Presented. (Fight/Loot functions) ##
         // {replace}
