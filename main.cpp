@@ -12,7 +12,6 @@ int main()
 {
     Player player(10, 0, 5, 2, 3, 3);
     Enemy enemy(5, 3, 1, 4, 4);
-
     // ON START (Load/NewGame functions)
     std::string choice;
     system("CLS");
