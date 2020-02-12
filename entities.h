@@ -94,10 +94,10 @@ public:
     }
 };
 
-// #### MAP ####
-class Map
-{
-public:
-};
+// #### MAP ####            is this even needed?
+//class Map
+//{
+//public:
+//};
 
 #endif
