@@ -33,6 +33,7 @@ int main()
     // Print the result.
     std::cout << player.hp << std::endl;
     std::cout << "DONE" << std::endl;
+    getchar();
 
     return 0;
 }

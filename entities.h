@@ -14,42 +14,35 @@ public:
     int damage;
     int defence;
     int gold;
+
+    int x;
+    int y;
 };
 
 class Player : public Entity
 {
 public:
-    int x;
-    int y;
-
-    int getX()
+    int moveX(std::string inputMove)
     {
-        return x;
-    }
-
-    int getY()
-    {
-        return y;
-    }
-
-    int move(std::string inputMove)
-    {
-        if(inputMove == "L")
+        if(inputMove == "L" || inputMove == "l")
         {
             x -= 1;
             return x;
         }
-        else if(inputMove == "R")
+        else if(inputMove == "R" || inputMove == "r")
         {
             x += 1;
             return x;
         }
-        else if(inputMove == "U")
+    }
+    int moveY(std::string inputMove)
+    {
+        if(inputMove == "U" || inputMove == "u")
         {
             y += 1;
             return y;
         }
-        else if(inputMove == "D")
+        else if(inputMove == "D" || inputMove == "d")
         {
             y -= 1;
             return y;
@@ -59,6 +52,9 @@ public:
 
 class Enemy : public Entity
 {
+public:
+    int x;
+    int y;
 };
 
 class NPC : public Entity

@@ -5,36 +5,65 @@ using namespace std;
 
 // ## Personal header(.h) files ##
 #include "entities.h"
+#include "combat.h"
 
 //  ##################    MAIN FUNCTION       ###############
 int main()
 {
-    // ON START (Load/NewGame functions)
-    // {replace}
-    system("CLS");
-
     Player player;
+    Enemy enemy;
 
-    // Starting position
+    // Initialise player stats.
+    player.hp = 10;
+    player.gold = 0;
+    player.damage = 5;
+    player.defence = 2;
+
     player.x = 3;
     player.y = 3;
+
+    // Test enemy stats.
+    enemy.hp = 5;
+    enemy.damage = 3;
+    enemy.defence = 1;
+
+    enemy.x = 4;
+    enemy.y = 4;
+
+    // ON START (Load/NewGame functions)
+    std::string choice;
+    system("CLS");
 
     // ON UPDATE
     while (true)
     {
+        // ## 1. Event Presented. (Fight/Loot functions) ##
+        if(player.x == enemy.x && player.y == enemy.y)
+        {
+            system("CLS");
+            player.hp == combat(player, enemy);
+        }
 
-        // ## 1. World Change.  (New area/block loaded. Display the stuff onto the screen.) ##
-        cout << "       Meadow" << endl;
+
+        // ## 2. World Change.  (New area/block loaded. Display the stuff onto the screen.) ##
+        cout << "    Green Hill Zone" << endl;
         cout << "    X: " << player.x << " Y: " << player.y << endl;
+        cout << "    HP: " << player.hp << " ATK: " << player.damage << " DEF: " << player.defence << endl;
 
-        // ## 2. Event Presented. (Fight/Loot functions) ##
-        // {replace}
 
         // ## 3. Futher Movement on the Map. (Move function (if the player did not die..)) ##
-        // {replace}
+        if (choice == "L" || choice == "R" || choice == "l" || choice == "r")
+        {
+            player.moveX(choice);
+        }
+        else if(choice == "U" || choice == "D" || choice == "u" || choice == "d")
+        {
+            player.moveY(choice);
+        }
 
         // ## 4. Wait. (For now) ##
-        getchar();     // Waits till you press a button.
+        choice = getchar(); // Waits till you press a button.
+
         system("CLS"); // Clears the Window.
     }
 
