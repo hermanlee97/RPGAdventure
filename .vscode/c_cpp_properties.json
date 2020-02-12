@@ -3,7 +3,10 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:/mingw-w64/mingw32/i686-w64-mingw32/include",
+                "C:/mingw-w64/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++",
+                "C:/mingw-w64/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"
             ],
             "defines": [
                 "_DEBUG",
@@ -12,9 +15,9 @@
             ],
             "windowsSdkVersion": "10.0.17763.0",
             "cStandard": "c11",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "msvc-x64",
-            "compilerPath": "C:\\mingw-w64\\mingw32\\bin\\i686-w64-mingw32-g++.exe"
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "C:/TDM-GCC-64/bin/g++.exe"
         }
     ],
     "version": 4

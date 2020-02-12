@@ -1,14 +1,8 @@
-int flight(Player player, Enemy enemy)
-{
-    int fHP;
+#ifndef FLIGHT_H
+#define FLIGHT_H
 
-    // Since you're running take some damage. (Later loose some coins too.)
-    fHP = player.hp - enemy.damage;
+#include "entities.h"
 
-    // Display Message.
-    std::cout << "\nThe enemy dealt " << enemy.damage - player.defence << " damage to you!" << std::endl;
+int flight(Player player, Enemy enemy);
 
-    // player.gold = player.gold-(player.gold/100);
-
-    return fHP;
-}
+#endif
