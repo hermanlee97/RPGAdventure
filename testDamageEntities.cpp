@@ -4,7 +4,6 @@
 // Include our FUNCTION files.
 #include "entities.h"
 #include "combat.h"
-#include "flight.h"
 
 int main()
 {

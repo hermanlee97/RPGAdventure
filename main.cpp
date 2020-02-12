@@ -22,7 +22,7 @@ int main()
         system("CLS"); // Clears the Window.
 
         // ## 1. Event Presented. (Fight/Loot functions) ##
-        if(player.x == enemy.x && player.y == enemy.y)
+        if (player.x == enemy.x && player.y == enemy.y)
         {
             cout << "    There is an enemy nearby!" << endl;
             cout << "    1. Fight\n    2. Flee" << endl;
@@ -30,14 +30,13 @@ int main()
             if (choice == "1")
             {
                 system("CLS");
-                player.hp == combat(player, enemy);
+                player.hp = combat(player, enemy);
             }
-            else if(choice == "2")
+            else if (choice == "2")
             {
                 player.moveX("L");
             }
         }
-
 
         // ## 2. World Change.  (New area/block loaded. Display the stuff onto the screen.) ##
         cout << "    Green Hill Zone" << endl;
@@ -45,20 +44,18 @@ int main()
         cout << "    HP: " << player.hp << " ATK: " << player.damage << " DEF: " << player.defence << " GOLD: " << player.gold << endl;
         cout << "    L: Go left\n    R: Go right\n    U: Go up\n    D: Go down" << endl;
 
-
         // ## 3. Futher Movement on the Map. (Move function (if the player did not die..)) ##
         if (choice == "L" || choice == "R" || choice == "l" || choice == "r")
         {
             player.moveX(choice);
         }
-        else if(choice == "U" || choice == "D" || choice == "u" || choice == "d")
+        else if (choice == "U" || choice == "D" || choice == "u" || choice == "d")
         {
             player.moveY(choice);
         }
 
         // ## 4. Wait. (For now) ##
         choice = getchar(); // Waits till you press a button.
-
     }
 
     return (0);

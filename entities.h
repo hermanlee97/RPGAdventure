@@ -24,27 +24,27 @@ public:
 class Player : public Entity
 {
 public:
-    int moveX(std::string inputMove)
+    int moveX(string inputMove)
     {
-        if(inputMove == "L" || inputMove == "l")
+        if (inputMove == "L" || inputMove == "l")
         {
             x -= 1;
             return x;
         }
-        else if(inputMove == "R" || inputMove == "r")
+        else if (inputMove == "R" || inputMove == "r")
         {
             x += 1;
             return x;
         }
     }
-    int moveY(std::string inputMove)
+    int moveY(string inputMove)
     {
-        if(inputMove == "U" || inputMove == "u")
+        if (inputMove == "U" || inputMove == "u")
         {
             y += 1;
             return y;
         }
-        else if(inputMove == "D" || inputMove == "d")
+        else if (inputMove == "D" || inputMove == "d")
         {
             y -= 1;
             return y;
@@ -53,13 +53,13 @@ public:
 
     Player(int a, int b, int c, int d, int e, int f)
     {
-        hp = a;         // 10 for testing
-        gold = b;       // 0 for testing
-        damage = c;     // 5 for testing
-        defence = d;    // 2 for testing
+        hp = a;      // 10 for testing
+        gold = b;    // 0 for testing
+        damage = c;  // 5 for testing
+        defence = d; // 2 for testing
 
-        x = e;          // 3 for testing
-        y = f;          // 3 for testing
+        x = e; // 3 for testing
+        y = f; // 3 for testing
     }
 };
 
@@ -68,12 +68,12 @@ class Enemy : public Entity
 public:
     Enemy(int a, int b, int c, int d, int e)
     {
-        hp = a;         // 5 for testing
-        damage = b;     // 3 for testing
-        defence = c;    // 1 for testing
+        hp = a;      // 5 for testing
+        damage = b;  // 3 for testing
+        defence = c; // 1 for testing
 
-        x = d;          // 4 for tesing
-        y = e;          // 4 for testing
+        x = d; // 4 for tesing
+        y = e; // 4 for testing
     }
 };
 
