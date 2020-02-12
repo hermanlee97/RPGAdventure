@@ -1,6 +1,4 @@
-#include "entities.h"
-
-int combat(Entity player, Entity enemy)
+int combat(Player player, Enemy enemy)
 {
     int pHP = player.hp;
     int nHP = enemy.hp;

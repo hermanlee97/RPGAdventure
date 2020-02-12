@@ -1,6 +1,4 @@
-#include "entities.h"
-
-int flight(Entity player, Entity enemy)
+int flight(Player player, Enemy enemy)
 {
     int playerHP;
 

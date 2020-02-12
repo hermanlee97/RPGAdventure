@@ -2,6 +2,8 @@
 #include <string>
 #include <windows.h>
 
+using namespace std;
+
 // #### Entites Class ####
 class Entity
 {
@@ -53,7 +55,7 @@ class NPC : public Entity
 class Item
 {
 public:
-    std::string myname;
+    string myname;
 };
 
 class Consumable : public Item
@@ -80,5 +82,45 @@ public:
 // #### MAP ####
 class Map
 {
+    bool isWalkable;
+    bool isEnemy;
+    string display;
+
 public:
+    // WALKABLE
+    void setIsWalkable(bool iswalkable)
+    {
+        isWalkable = iswalkable;
+    }
+
+    bool getIsWalkable()
+    {
+        return isWalkable;
+    }
+
+    // ENEMY
+    void setIsEnemy(bool isenemy)
+    {
+        isEnemy = isenemy;
+    }
+
+    bool getIsEnemy()
+    {
+        return isEnemy;
+    }
+
+    // DISPLAY
+    void setDisplay(string useDisplay)
+    {
+        display = useDisplay;
+    }
+
+    std::string getDisplay()
+    {
+        return display;
+    }
+};
+
+class Block : public Map
+{
 };
