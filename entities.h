@@ -66,9 +66,6 @@ public:
 class Enemy : public Entity
 {
 public:
-    int x;
-    int y;
-
     Enemy(int a, int b, int c, int d, int e)
     {
         hp = a;         // 5 for testing
