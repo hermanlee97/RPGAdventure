@@ -36,7 +36,6 @@ int combat(Player player, Enemy enemy)
             {
                 system("CLS");
                 std::cout << "The enemy has been defeated!" << std::endl;
-                player.gold += 5;
                 system("pause");
                 return pHP;
             }
