@@ -3,22 +3,41 @@
 
 #include <iostream>
 #include <string>
-#include <windows.h>
+// #include <windows.h>
 
 using namespace std;
 
 // #### Entites Class ####
 class Entity
 {
-public:
-    int hp;
-    int xp;
-    int damage;
-    int defence;
-    int gold;
+    private: 
+        int hp;
+        int xp;
+        int damage;
+        int defence;
+        int gold;
+        int x_coor;
+        int y_coor;
 
-    int x;
-    int y;
+    public:
+        void set_hp(int a){hp = a;}
+        void set_xp(int b){xp = b;}
+        void set_damage(int c){damage = c;}
+        void set_defence(int d){defence = d;}
+        void set_gold(int e){gold = e;}
+        void set_x_coor(int x){x_coor = x;}
+        void set_y_coor(int y){y_coor = y;}
+
+        int get_hp(){return hp;}
+        int get_xp(){return xp;}
+        int get_damage(){return damage;}
+        int get_defence(){return defence;}
+        int get_gold(){return gold;}
+        int get_x_coor(){return x_coor;}
+        int get_y_coor(){return y_coor;}
+        }
+
+
 };
 
 class Player : public Entity
