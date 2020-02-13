@@ -31,6 +31,8 @@ int main()
             {
                 system("CLS");
                 player.hp = combat(player, enemy);
+                player.gold += 5;
+                player.moveX("L");
             }
             else if (choice == "2")
             {
