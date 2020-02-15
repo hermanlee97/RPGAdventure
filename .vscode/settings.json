@@ -1,0 +1,8 @@
+{
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.fileDirectoryAsCwd": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ main.cpp combat.cpp -o main"
+    }
+}
