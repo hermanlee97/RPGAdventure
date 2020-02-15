@@ -55,7 +55,7 @@ class Map {
 
         // create map through text file
         void make_map(string map_name){
-            ifstream map_file(map_name);
+            ifstream map_file(map_name.c_str());
             string line;
             int cur = 0;
             vector<Block> row;

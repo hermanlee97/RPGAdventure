@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
-// #include <windows.h>
+#include <windows.h>
 using namespace std;
 
 // ## Personal header(.h) files ##
 #include "entities.h"
-#include "combat.cpp"
+#include "combat.h"
 #include "map.h"
 #include "block.h"
 #include "events.h"
