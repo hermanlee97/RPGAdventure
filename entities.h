@@ -25,8 +25,8 @@ public:
 class Player : public Entity
 {
 public:
-    array<Item, 9> inventory = {};
-    array<Equipment, 0> armourSlot = {};
+    // array<Item, 9> inventory = {};
+    // array<Equipment, 0> armourSlot = {};
 
     int moveX(string inputMove)
     {
@@ -57,9 +57,9 @@ public:
 
     void equipArmour()
     {
-        for(int iCnter = 0; iCnter <= 9; iCnter++)
+        for (int iCnter = 0; iCnter <= 9; iCnter++)
         {
-            cout << iCnter+1 << ". " << inventory[iCnter] << ".\n";
+            cout << iCnter + 1 << ". " << inventory[iCnter] << ".\n";
         }
     }
 
