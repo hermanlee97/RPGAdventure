@@ -2,101 +2,102 @@
 #define MAP_H
 
 #include <iostream>
-#include <vector>
-#include <string>
 #include <sstream>
 #include <fstream>
+#include <vector>
+#include <string>
+
+#include "block.h"
+#include "entities.h"
+
 using namespace std;
 
-class Block{
-    private:
-        int x_coordinate;
-        int y_coordinate;
-        bool walkable;
-        bool has_npc;
-        bool has_enemy;
-        //bool has_player;
-
-    public:
-        int get_x_coor(){return x_coordinate;}
-        int get_y_coor(){return y_coordinate;}
-        bool get_walkable(){return walkable;}
-        bool get_has_npc(){return has_npc;}
-        bool get_has_enemy(){return has_enemy;}
-        // bool get_has_player(){return has_player;}
-
-        void set_x_coor(int x){x_coordinate = x;}
-        void set_y_coor(int y){y_coordinate = y;}
-        void set_walkable(bool w){walkable = w;}
-        void set_has_npc(bool n){has_npc = n;}
-        void set_has_enemy(bool e){has_enemy = e;}
-        // void set_has_player(bool x){has_player = x;}
-
-        Block(int x, int y, bool w, bool npc, bool e) {
-            set_x_coor(x);
-            set_y_coor(y);
-            set_walkable(w);
-            set_has_npc(npc);
-            set_has_enemy(e);
-        }
-
-};
-
-
 class Map {
-    public:
+    private:
         vector<vector<Block> > content;
-        
+
+    public:
+        // get full map content
+        vector<vector<Block> > get_content(){return content;}
+
+        // get single block
+        Block get_block(int x, int y){return get_content()[x][y];}
+
+        // set single row
+        void set_row(vector<Block> row){
+            content.push_back(row);
+        }
+        // type converters
         int str_to_int(string s){
             stringstream temp(s);
             int x = 0;
             temp >> x;
             return x;
         }
-
         bool str_to_bool(string s){
-            if (s == "true "){
+            if (s == "true"){
                 return true;
             }
             return false;
         }
 
+        // splitting line by commas
+        vector<string> split_by_comma(string line){
+            vector<string> result;
+            stringstream ss(line);
+            for(int i = 0; i<5; i++){
+                string entry;
+                getline(ss, entry, ',');
+                result.push_back(entry);
+            }
+            return result;
+        }
+
+        // create map through text file
         void make_map(string map_name){
             ifstream map_file(map_name);
             string line;
             int cur = 0;
             vector<Block> row;
             while (getline(map_file, line)){
-                string a = line.substr(0,1);
-                string b = line.substr(2,1);
-                string c = line.substr(4,5);
-                string d = line.substr(10,5);
-                string e = line.substr(16,5);
+                vector<string> split_string = split_by_comma(line);
+                int x_coor = str_to_int(split_string[0]);
+                int y_coor = str_to_int(split_string[1]);
+                bool walkable = str_to_bool(split_string[2]);
+                bool npc = str_to_bool(split_string[3]);
 
-                int x_coor = str_to_int(a);
-                int y_coor = str_to_int(b);
-                bool walkable = str_to_bool(c);
-                bool npc = str_to_bool(d);
-                bool enemy = str_to_bool(e);
+                Block b(x_coor, y_coor, walkable, npc);
+
+                if (split_string[4] == "weak enemy"){
+                    b.set_enemy(Weak_Enemy(x_coor, y_coor));
+                }
+
+                else if (split_string[4] == "strong enemy"){
+                    b.set_enemy(Strong_Enemy(x_coor, y_coor));
+                }
 
                 if (cur == x_coor){
-                    row.push_back(Block(x_coor, y_coor, walkable, npc, enemy));
+                    row.push_back(b);
                 }
                 else{
                     content.push_back(row);
                     row.clear();
-                    row.push_back(Block(x_coor, y_coor, walkable, npc, enemy));
+                    row.push_back(b);
                     cur += 1;
                 }
             }
-            content.push_back(row);
+            set_row(row);
         }
 
-        void print_map(){
-            string m;
+        void print_map(Player p){
+            string m = "\n";
             for (int i = 0; i < content.size(); i++){
                 for (int j = 0; j < content[i].size(); j++){
-                    if (content[i][j].get_walkable()){
+                    if (p.get_x_coor() == i && p.get_y_coor() == j) {
+                        m.append("X ");
+                        continue;
+                    }
+                    else if (content[i][j].get_walkable()){
                         m.append("o ");
                         continue;
                     }
@@ -105,6 +106,10 @@ class Map {
                 m.append("\n");
             }
             cout << m << endl;    
+        }
+
+        Map(string map_name){
+            make_map(map_name);
         }
 
 };

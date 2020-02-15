@@ -1,60 +1,60 @@
 #include "entities.h"
 
+using namespace std;
+
 int combat(Player player, Enemy enemy)
 {
-    int pHP = player.hp;
-    int nHP = enemy.hp;
+    int pHP = player.get_hp();
+    int nHP = enemy.get_hp();
+    cout << "Enemy appears!" << endl;
 
-    while (nHP > 0 && pHP > 0)
-    {
+    while (nHP > 0 && pHP > 0){
         // GIVE PLAYER CHOICE
-        system("CLS");
-        int choice;
-        std::cout << "Your HP: " << pHP << "\nEnemy HP: " << nHP << "\n 1. Fight\n 2. Flee" << std::endl;
-        std::cin >> choice;
+        // system("clear");
+        string choice;
 
-        if (choice == 1)
-        {
+        while(true){
+            cout << "Your HP: " << pHP << "\nEnemy HP: " << nHP << "\n 1. Fight\n 2. Flee\n" << endl;
+            cin >> choice;
+            if (choice == "1" || choice == "2") { break; }
+            else { cout << "Invalid input!" << endl; }
+        }
+
+        if (choice == "1"){
             // DEAL DAMAGE TO ENEMY
-            if ((enemy.defence - player.damage) < 0)
-            {
-                system("CLS");
-                nHP -= player.damage - enemy.defence;
-                std::cout << "You dealt " << player.damage - enemy.defence << " damage to the enemy!" << std::endl;
-                system("pause");
+            if ((player.get_damage() - enemy.get_defence()) > 0){
+                // system("clear");
+                nHP -= player.get_damage() - enemy.get_defence();
+                cout << "You dealt " << player.get_damage() - enemy.get_defence() << " damage to the enemy!" << endl;
+                // system("pause");
             }
-            else
-            {
-                system("CLS");
-                std::cout << "The enemy deflected the blow!" << std::endl;
-                nHP -= 0;
-                system("pause");
+            else{
+                system("clear");
+                cout << "The enemy deflected the blow!" << endl;
+                // system("pause");
             }
 
             // CHECK IF THE ENEMY IS DEAD
-            if (nHP <= 0)
-            {
-                system("CLS");
-                std::cout << "The enemy has been defeated!" << std::endl;
-                system("pause");
+            if (nHP <= 0){
+                // system("clear");
+                cout << "The enemy has been defeated!\n" << endl;
+                // system("pause");
                 return pHP;
             }
-            else
-            {
+            else {
                 // DEAL DAMAGE TO PLAYER
-                if ((player.defence - enemy.damage) < 0)
+                if ((enemy.get_damage() - player.get_damage()) > 0)
                 {
-                    system("CLS");
-                    pHP -= enemy.damage - player.defence;
-                    std::cout << "The enemy dealt " << enemy.damage - player.defence << " damage to you!" << std::endl;
-                    system("pause");
+                    // system("clear");
+                    pHP -= enemy.get_damage() - player.get_damage();
+                    cout << "The enemy dealt " << enemy.get_damage() - player.get_damage() << " damage to you!\n" << endl;
+                    // system("pause");
                 }
                 else
                 {
-                    system("CLS");
-                    std::cout << "You deflected the blow!" << std::endl;
-                    pHP -= 0;
-                    system("pause");
+                    // system("clear");
+                    cout << "You deflected the blow!\n" << endl;
+                    // system("pause");
                 }
             }
 
@@ -62,27 +62,27 @@ int combat(Player player, Enemy enemy)
             if (pHP <= 0)
             {
                 // Death function, END GAME LOOP
-                system("CLS");
-                std::cout << "You have been defeated!" << std::endl;
-                system("pause");
+                // system("clear");
+                cout << "You have been defeated!\n" << endl;
+                // system("pause");
                 return 0;
             }
         }
-        else if (choice == 2)
+        else if (choice == "2")
         {
-            system("CLS");
+            // system("clear");
             // Since you're running take some damage. (Later loose some coins too.)
-            pHP = player.hp - enemy.damage;
-            std::cout << "The enemy dealt " << enemy.damage - player.defence << " damage to you!" << std::endl;
+            pHP = player.get_hp() - enemy.get_damage();
+            cout << "The enemy managed to hit you before you ran and dealt " << enemy.get_damage() << " damage to you!\n" << endl;
             // player.gold = player.gold-(player.gold/100);
-            system("pause");
-            return pHP, player.moveX("L");
+            // system("pause");
+            return pHP;
         }
 
         else
         {
-            system("CLS");
-            std::cout << "Not a valid option." << std::endl;
+            // system("clear");
+            cout << "Not a valid option." << endl;
         }
     }
     return pHP;
