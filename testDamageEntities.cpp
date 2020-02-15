@@ -1,5 +1,4 @@
 #include <iostream>
-#include <windows.h>
 
 // Include our FUNCTION files.
 #include "entities.h"
