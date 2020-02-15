@@ -10,7 +10,7 @@ int combat(Player player, Enemy enemy)
 
     while (nHP > 0 && pHP > 0){
         // GIVE PLAYER CHOICE
-        // system("clear");
+        // system("CLS");
         string choice;
 
         while(true){
@@ -23,20 +23,20 @@ int combat(Player player, Enemy enemy)
         if (choice == "1"){
             // DEAL DAMAGE TO ENEMY
             if ((player.get_damage() - enemy.get_defence()) > 0){
-                // system("clear");
+                // system("CLS");
                 nHP -= player.get_damage() - enemy.get_defence();
                 cout << "You dealt " << player.get_damage() - enemy.get_defence() << " damage to the enemy!" << endl;
                 // system("pause");
             }
             else{
-                system("clear");
+                system("CLS");
                 cout << "The enemy deflected the blow!" << endl;
                 // system("pause");
             }
 
             // CHECK IF THE ENEMY IS DEAD
             if (nHP <= 0){
-                // system("clear");
+                // system("CLS");
                 cout << "The enemy has been defeated!\n" << endl;
                 // system("pause");
                 return pHP;
@@ -45,14 +45,14 @@ int combat(Player player, Enemy enemy)
                 // DEAL DAMAGE TO PLAYER
                 if ((enemy.get_damage() - player.get_damage()) > 0)
                 {
-                    // system("clear");
+                    // system("CLS");
                     pHP -= enemy.get_damage() - player.get_damage();
                     cout << "The enemy dealt " << enemy.get_damage() - player.get_damage() << " damage to you!\n" << endl;
                     // system("pause");
                 }
                 else
                 {
-                    // system("clear");
+                    // system("CLS");
                     cout << "You deflected the blow!\n" << endl;
                     // system("pause");
                 }
@@ -62,7 +62,7 @@ int combat(Player player, Enemy enemy)
             if (pHP <= 0)
             {
                 // Death function, END GAME LOOP
-                // system("clear");
+                // system("CLS");
                 cout << "You have been defeated!\n" << endl;
                 // system("pause");
                 return 0;
@@ -70,7 +70,7 @@ int combat(Player player, Enemy enemy)
         }
         else if (choice == "2")
         {
-            // system("clear");
+            // system("CLS");
             // Since you're running take some damage. (Later loose some coins too.)
             pHP = player.get_hp() - enemy.get_damage();
             cout << "The enemy managed to hit you before you ran and dealt " << enemy.get_damage() << " damage to you!\n" << endl;
@@ -81,7 +81,7 @@ int combat(Player player, Enemy enemy)
 
         else
         {
-            // system("clear");
+            // system("CLS");
             cout << "Not a valid option." << endl;
         }
     }

@@ -15,12 +15,14 @@ int main() {
     // ON START (Load/NewGame functions)
     Map world_map("map_02");
     Player player(0, 0, 10, 5, 2, 0, 0);
+    Equipment basic_armour("Basic Armour", 0, 2);
     string action;
 
+    player.add_item(basic_armour);
     // game loop
     while (true)
     {
-        system("clear");
+        system("CLS");
         Block cur = world_map.get_block(player.get_x_coor(),player.get_y_coor());
         cout << "You are now at (" << player.get_x_coor() << "," << player.get_y_coor() << "). \n" << endl;
 
