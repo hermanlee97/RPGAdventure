@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-// #include <windows.h>
 
 using namespace std;
 
@@ -142,24 +141,6 @@ class NPC : public Entity{
             set_gold(d);
             set_xp(e);
         }
-};
-
-
-// #### Items Class ####
-class Item{
-    public:
-        string name;
-};
-
-class Consumable : public Item{
-    public:
-        void Consume(){;}
-};
-
-class Equipment : public Item{
-    public:
-        void equip(){;}
-        void unequip(){;}
 };
 
 #endif
