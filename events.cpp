@@ -79,8 +79,24 @@ std::string options(Map map, Block cur, Player player){
             else { cout << "There's no npc here." << endl;}
         }
 
-        else if (choice == "8"){
+        else if (choice == "2"){
             player.list_inventory();
+        }
+
+        else if (choice == "3"){
+            player.equip_armour(0);
+        }
+
+        else if (choice == "4"){
+            player.unequip_armour(0);
+        }
+
+        else if (choice == "5"){
+            player.equip_weapon(1);
+        }
+
+        else if (choice == "6"){
+            player.unequip_weapon(0);
         }
 
         else if (choice == "9") {

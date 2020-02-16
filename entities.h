@@ -140,28 +140,56 @@ class Player : public Entity{
         }
 
         // inventory
+
         void add_item(Equipment item){
             inventory.push_back(item);
         }
-        
+
         void remove_item(int element){
             inventory.erase(inventory.begin() + element);
         }
 
+        void list_inventory(){
+            if(inventory.size() == 0){
+                cout << "Inventory is empty." << endl;
+            }
+            else{
+                for(int i; i < inventory.size(); i++){
+                    cout << i+1 << ". "  << inventory[i].get_name() << endl;
+                }
+            }
+        }
+
+        // armour
+
         void equip_armour(int element){
             armour_slot.push_back(inventory[element]);
             inventory.erase(inventory.begin() + element);
+            int new_defence = get_defence() + armour_slot[0].get_defence();
+            set_defence(new_defence);
         }
 
         void unequip_armour(int element){
+            int new_defence = get_defence() - armour_slot[0].get_defence();
+            set_defence(new_defence);
             inventory.push_back(armour_slot[element]);
             armour_slot.erase(armour_slot.begin() + element);
         }
 
-        void list_inventory(){
-            for(int i; i < inventory.size(); i++){
-                cout << i+1 << ". "  << inventory[i].get_name() << endl;
-            }
+        // weapons
+
+        void equip_weapon(int element){
+            weapon_slot.push_back(inventory[element]);
+            inventory.erase(inventory.begin() + element);
+            int new_damage = get_damage() + weapon_slot[0].get_attack();
+            set_damage(new_damage);
+        }
+
+        void unequip_weapon(int element){
+            int new_damage = get_damage() - weapon_slot[0].get_attack();
+            set_damage(new_damage);
+            inventory.push_back(weapon_slot[element]);
+            weapon_slot.erase(weapon_slot.begin() + element);
         }
 };
 
