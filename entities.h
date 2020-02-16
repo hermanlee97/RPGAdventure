@@ -159,8 +159,8 @@ class Player : public Entity{
         }
 
         void list_inventory(){
-            for(int i; i <= inventory.size(); i++){
-                cout << inventory[i].get_name();
+            for(int i; i < inventory.size(); i++){
+                cout << i+1 << ". "  << inventory[i].get_name() << endl;
             }
         }
 };
