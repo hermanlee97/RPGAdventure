@@ -1,18 +1,6 @@
-#include <windows.h>
-#include <iostream>
-#include <string>
-#include <conio.h>
+#include "menuOrLayout.h"
 
 using namespace std;
-
-// MainMenu - use only (outside)
-int MainMenu();
-
-// Dispaly Functions.
-void SetPos(int x, int y);
-void MainMenuDisplay();
-void Options(int x);
-void ResetArrow();
 
 // Replace the name with MainMenu().
 int MainMenu()

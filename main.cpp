@@ -9,8 +9,7 @@ using namespace std;
 #include "map.h"
 #include "block.h"
 #include "events.h"
-
-#include "menuOrLayout.cpp"
+#include "menuOrLayout.h"
 
 //  ##################    MAIN FUNCTION       ###############
 int main()
