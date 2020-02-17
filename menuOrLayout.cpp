@@ -5,18 +5,22 @@
 
 using namespace std;
 
+// MainMenu - use only (outside)
+int MainMenu();
+
+// Dispaly Functions.
 void SetPos(int x, int y);
-void MainMenu();
+void MainMenuDisplay();
 void Options(int x);
 void ResetArrow();
 
 // Replace the name with MainMenu().
-int main()
+int MainMenu()
 {
     // START OF THE GAME
     system("CLS");
 
-    MainMenu();
+    MainMenuDisplay();
 
     char key;
     int hold = 0;
@@ -24,6 +28,28 @@ int main()
     while (1)
     {
         key = getch();
+
+        if (key == '\r')
+        {
+            // Take the Value ur in and trigger the respective function.
+            switch (hold)
+            {
+            case 0:
+                // START()
+                return 1;
+                break;
+
+            case 1:
+                // LOAD()
+                return 1;
+                break;
+
+            case 2:
+                // EXIT()
+                return 0;
+                break;
+            }
+        }
 
         if (key == 's')
         {
@@ -68,7 +94,7 @@ void SetPos(int x, int y)
 }
 
 // Displays basic Menu options.
-void MainMenu()
+void MainMenuDisplay()
 {
     // Display the options.
     SetPos(38, 12);
@@ -84,6 +110,7 @@ void MainMenu()
     SetPos(45, 16);
 }
 
+// Get's rid of the Arrows.
 void ResetArrow()
 {
     SetPos(36, 12);
