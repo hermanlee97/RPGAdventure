@@ -160,6 +160,29 @@ class Player : public Entity{
             }
         }
 
+        void list_armour(){
+            int checker = 0;
+            for(int i; i < inventory.size(); i++){
+                if (inventory[i].get_defence() == 0){
+                    continue;
+                }
+                else{
+                    cout << i+1 << ". "  << inventory[i].get_name() << endl;
+                }
+            }
+        }
+
+        void list_weapon(){
+            for(int i; i < inventory.size(); i++){
+                if (inventory[i].get_attack() == 0){
+                    continue;
+                }
+                else{
+                    cout << i+1 << ". "  << inventory[i].get_name() << endl;
+                }
+            }
+        }
+
         // armour
 
         void equip_armour(int element){

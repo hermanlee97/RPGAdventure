@@ -15,7 +15,12 @@ std::string options(Map map, Block cur, Player player){
     while (true) {
         // ask for user input
         string choice;
-        cout << "W: move up    A: move left    S: move down    D: move right    1: talk to npc    9: display stats    0: open world map" << endl;
+        int intchoice;
+        cout << "W: move up    A: move left    S: move down    D: move right\n";
+        cout << "1: talk to npc    2: list inventory\n";
+        cout << "3: equip armour    4: unequip armour\n";
+        cout << "5: equip weapon    4: unequip weapon\n";
+        cout << "9: display stats    0: open world map" << endl;
         cin >> choice;
 
         // going left 
@@ -84,7 +89,15 @@ std::string options(Map map, Block cur, Player player){
         }
 
         else if (choice == "3"){
-            player.equip_armour(0);
+            player.list_armour();
+            cout << "Choose an item to equip." << endl;
+            cin >> intchoice;
+            if (player.inventory[intchoice -1].get_defence() == 0){
+                cout << "That item has no defence." << endl;
+            }
+            else{
+                player.equip_armour(intchoice - 1);
+            }
         }
 
         else if (choice == "4"){
@@ -92,7 +105,15 @@ std::string options(Map map, Block cur, Player player){
         }
 
         else if (choice == "5"){
-            player.equip_weapon(1);
+            player.list_weapon();
+            cout << "Choose an item to equip." << endl;
+            cin >> intchoice;
+            if (player.inventory[intchoice -1].get_attack() == 0){
+                cout << "That item has no attack." << endl;
+            }
+            else{
+                player.equip_weapon(intchoice - 1);
+            }
         }
 
         else if (choice == "6"){
