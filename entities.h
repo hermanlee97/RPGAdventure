@@ -5,49 +5,9 @@
 #include <vector>
 #include <string>
 #include <windows.h>
+#include "items.h"
 
 using namespace std;
-
-// #### Items Class ####
-class Item{
-    private:
-        string name;
-        int attack;
-        int defence;
-
-        static int num_of_items;
-    public:
-        void set_name(string input){name = input;}
-        void set_attack(int input){attack = input;}
-        void set_defence(int input){defence = input;}
-
-        string get_name(){return name;}
-        int get_attack(){return attack;}
-        int get_defence(){return defence;}
-
-};
-
-class Consumable : public Item{
-    public:
-        void Consume(){;}
-};
-
-class Equipment : public Item{
-    public:
-
-        // constructor
-        Equipment(string a, int b, int c){
-            set_name(a);
-            set_attack(b);
-            set_defence(c);
-        }
-        Equipment(){
-            set_name("");
-            set_attack(0);
-            set_defence(0);
-        }
-
-};
 
 // #### Entites Class ####
 class Entity{
@@ -154,7 +114,7 @@ class Player : public Entity{
                 cout << "Inventory is empty." << endl;
             }
             else{
-                for(int i; i < inventory.size(); i++){
+                for(int i = 0; i < inventory.size(); i++){
                     cout << i+1 << ". "  << inventory[i].get_name() << endl;
                 }
             }
@@ -162,7 +122,7 @@ class Player : public Entity{
 
         void list_armour(){
             int checker = 0;
-            for(int i; i < inventory.size(); i++){
+            for(int i = 0; i < inventory.size(); i++){
                 if (inventory[i].get_defence() == 0){
                     continue;
                 }
@@ -173,7 +133,7 @@ class Player : public Entity{
         }
 
         void list_weapon(){
-            for(int i; i < inventory.size(); i++){
+            for(int i = 0; i < inventory.size(); i++){
                 if (inventory[i].get_attack() == 0){
                     continue;
                 }
