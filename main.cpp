@@ -16,12 +16,11 @@ using namespace std;
 int main()
 {
     // ON START (Load/NewGame functions)
-
     int shouldStart = MainMenu();
 
+    // TO EXIT the Game
     if (shouldStart == 0)
     {
-        cout << "YOOOO";
         return 0;
     }
 
@@ -31,7 +30,8 @@ int main()
     string action;
 
     player.add_item(basic_armour);
-    // game loop
+
+    // GAME LOOP
     while (true)
     {
         system("CLS");
