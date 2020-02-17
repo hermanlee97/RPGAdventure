@@ -5,49 +5,9 @@
 #include <vector>
 #include <string>
 #include <windows.h>
+#include "items.h"
 
 using namespace std;
-
-// #### Items Class ####
-class Item{
-    private:
-        string name;
-        int attack;
-        int defence;
-
-        static int num_of_items;
-    public:
-        void set_name(string input){name = input;}
-        void set_attack(int input){attack = input;}
-        void set_defence(int input){defence = input;}
-
-        string get_name(){return name;}
-        int get_attack(){return attack;}
-        int get_defence(){return defence;}
-
-};
-
-class Consumable : public Item{
-    public:
-        void Consume(){;}
-};
-
-class Equipment : public Item{
-    public:
-
-        // constructor
-        Equipment(string a, int b, int c){
-            set_name(a);
-            set_attack(b);
-            set_defence(c);
-        }
-        Equipment(){
-            set_name("");
-            set_attack(0);
-            set_defence(0);
-        }
-
-};
 
 // #### Entites Class ####
 class Entity{
@@ -161,6 +121,10 @@ class Player : public Entity{
         }
 
         void list_armour(){
+<<<<<<< HEAD
+=======
+            int checker = 0;
+>>>>>>> bf3fa865ccd67c74ea7dfe2741be59f3a2ca2e55
             for(int i = 0; i < inventory.size(); i++){
                 if (inventory[i].get_defence() == 0){
                     continue;
