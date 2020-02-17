@@ -19,7 +19,7 @@ std::string options(Map map, Block cur, Player player){
         cout << "W: move up    A: move left    S: move down    D: move right\n";
         cout << "1: talk to npc    2: list inventory\n";
         cout << "3: equip armour    4: unequip armour\n";
-        cout << "5: equip weapon    4: unequip weapon\n";
+        cout << "5: equip weapon    6: unequip weapon\n";
         cout << "9: display stats    0: open world map" << endl;
         cin >> choice;
 

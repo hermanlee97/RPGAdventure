@@ -154,15 +154,14 @@ class Player : public Entity{
                 cout << "Inventory is empty." << endl;
             }
             else{
-                for(int i; i < inventory.size(); i++){
+                for(int i = 0; i < inventory.size(); i++){
                     cout << i+1 << ". "  << inventory[i].get_name() << endl;
                 }
             }
         }
 
         void list_armour(){
-            int checker = 0;
-            for(int i; i < inventory.size(); i++){
+            for(int i = 0; i < inventory.size(); i++){
                 if (inventory[i].get_defence() == 0){
                     continue;
                 }
@@ -173,7 +172,7 @@ class Player : public Entity{
         }
 
         void list_weapon(){
-            for(int i; i < inventory.size(); i++){
+            for(int i = 0; i < inventory.size(); i++){
                 if (inventory[i].get_attack() == 0){
                     continue;
                 }
