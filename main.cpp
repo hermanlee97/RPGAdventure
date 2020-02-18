@@ -25,12 +25,15 @@ int main()
 
     Map world_map("map_02");
     Player player(0, 0, 10, 5, 2, 0, 0);
-    Equipment basic_armour("Basic Armour", 0, 2);
+
+    // test items
+    Equipment test_armour("Test Armour", 0, 2);
+    Equipment test_sword("Test Sword", 1, 0);
+    player.add_item(test_armour);
+    player.add_item(test_sword);
+
     string action;
-
-    player.add_item(basic_armour);
-
-    // GAME LOOP
+    // game loop
     while (true)
     {
         system("CLS");

@@ -6,49 +6,9 @@
 #include <string>
 #include <array>
 #include <windows.h>
+#include "items.h"
 
 using namespace std;
-
-// #### Items Class ####
-class Item{
-    private:
-        string name;
-        int attack;
-        int defence;
-
-        static int num_of_items;
-    public:
-        void set_name(string input){name = input;}
-        void set_attack(int input){attack = input;}
-        void set_defence(int input){defence = input;}
-
-        string get_name(){return name;}
-        int get_attack(){return attack;}
-        int get_defence(){return defence;}
-
-};
-
-class Consumable : public Item{
-    public:
-        void Consume(){;}
-};
-
-class Equipment : public Item{
-    public:
-
-        // constructor
-        Equipment(string a, int b, int c){
-            set_name(a);
-            set_attack(b);
-            set_defence(c);
-        }
-        Equipment(){
-            set_name("");
-            set_attack(0);
-            set_defence(0);
-        }
-
-};
 
 // #### Entites Class ####
 class Entity{
@@ -141,28 +101,82 @@ class Player : public Entity{
         }
 
         // inventory
+
         void add_item(Equipment item){
             inventory.push_back(item);
         }
-        
+
         void remove_item(int element){
             inventory.erase(inventory.begin() + element);
         }
 
+        void list_inventory(){
+            if(inventory.size() == 0){
+                cout << "Inventory is empty." << endl;
+            }
+            else{
+                for(int i = 0; i < inventory.size(); i++){
+                    cout << i+1 << ". "  << inventory[i].get_name() << endl;
+                }
+            }
+        }
+
+        void list_armour(){
+<<<<<<< HEAD
+=======
+            int checker = 0;
+>>>>>>> bf3fa865ccd67c74ea7dfe2741be59f3a2ca2e55
+            for(int i = 0; i < inventory.size(); i++){
+                if (inventory[i].get_defence() == 0){
+                    continue;
+                }
+                else{
+                    cout << i+1 << ". "  << inventory[i].get_name() << endl;
+                }
+            }
+        }
+
+        void list_weapon(){
+            for(int i = 0; i < inventory.size(); i++){
+                if (inventory[i].get_attack() == 0){
+                    continue;
+                }
+                else{
+                    cout << i+1 << ". "  << inventory[i].get_name() << endl;
+                }
+            }
+        }
+
+        // armour
+
         void equip_armour(int element){
             armour_slot.push_back(inventory[element]);
             inventory.erase(inventory.begin() + element);
+            int new_defence = get_defence() + armour_slot[0].get_defence();
+            set_defence(new_defence);
         }
 
         void unequip_armour(int element){
+            int new_defence = get_defence() - armour_slot[0].get_defence();
+            set_defence(new_defence);
             inventory.push_back(armour_slot[element]);
             armour_slot.erase(armour_slot.begin() + element);
         }
 
-        void list_inventory(){
-            for(int i; i <= inventory.size(); i++){
-                cout << inventory[i].get_name();
-            }
+        // weapons
+
+        void equip_weapon(int element){
+            weapon_slot.push_back(inventory[element]);
+            inventory.erase(inventory.begin() + element);
+            int new_damage = get_damage() + weapon_slot[0].get_attack();
+            set_damage(new_damage);
+        }
+
+        void unequip_weapon(int element){
+            int new_damage = get_damage() - weapon_slot[0].get_attack();
+            set_damage(new_damage);
+            inventory.push_back(weapon_slot[element]);
+            weapon_slot.erase(weapon_slot.begin() + element);
         }
 };
 
