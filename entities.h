@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <array>
 #include <windows.h>
 #include "items.h"
 
