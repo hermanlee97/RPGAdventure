@@ -122,10 +122,6 @@ class Player : public Entity{
         }
 
         void list_armour(){
-<<<<<<< HEAD
-=======
-            int checker = 0;
->>>>>>> bf3fa865ccd67c74ea7dfe2741be59f3a2ca2e55
             for(int i = 0; i < inventory.size(); i++){
                 if (inventory[i].get_defence() == 0){
                     continue;
