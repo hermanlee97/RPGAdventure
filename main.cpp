@@ -10,6 +10,7 @@ using namespace std;
 #include "block.h"
 #include "events.h"
 #include "menuOrLayout.h"
+#include "printingSpaces.h"
 
 //  ##################    MAIN FUNCTION       ###############
 int main()
