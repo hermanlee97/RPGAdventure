@@ -46,8 +46,8 @@ int combat(Player player, Enemy enemy)
                 if ((enemy.get_damage() - player.get_damage()) > 0)
                 {
                     // system("CLS");
-                    pHP -= enemy.get_damage() - player.get_damage();
-                    cout << "The enemy dealt " << enemy.get_damage() - player.get_damage() << " damage to you!\n" << endl;
+                    pHP -= enemy.get_damage() - player.get_defence();
+                    cout << "The enemy dealt " << enemy.get_damage() - player.get_defence() << " damage to you!\n" << endl;
                     // system("pause");
                 }
                 else

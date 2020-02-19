@@ -91,7 +91,7 @@ class Player : public Entity{
 
         // display
         void display_stat() {
-            cout << "\nCoordinte: (" << get_x_coor() << "," << get_y_coor() << ")" << endl;
+            cout << "\nCo-ordinates: (" << get_x_coor() << "," << get_y_coor() << ")" << endl;
             cout << "HP: " << get_hp() << "/" << get_max_hp() << endl;
             cout << "Attack: " << get_damage() << endl;
             cout << "Defence: " << get_defence() << endl;
