@@ -219,6 +219,41 @@ class Strong_Enemy : public Enemy{
 
 class NPC : public Entity{
     public:
+        Equipment equipment;
+        Consumable consumable;
+        vector<Equipment> equipment_vendor;
+        vector<Consumable> consumable_vendor;
+
+        // equipment
+
+        void refresh_equipment(){
+            ;
+        }
+
+        void list_equipment(){
+            ;
+        }
+
+        // consumables
+
+        void refresh_consumables(){
+
+        }
+
+        void list_consumables(){
+            ;
+        }
+
+        // player interaction
+
+        void buy_item(Player player){
+            ;
+        }
+
+        void sell_item(Player player){
+            ;
+        }
+
         NPC(int x, int y, int a, int b, int c, int d, int e){
             set_x_coor(x);
             set_y_coor(y);
