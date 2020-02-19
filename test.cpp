@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-    Map m("map_01");
-    Player p(0,1,2,3,4,5,6);
-    m.print_map(p);
+    Map m("map_02");
+    Player p(1,1,2,3,4,5,6);
+    m.print_mini_map(p);
 }

@@ -108,6 +108,27 @@ class Map {
             cout << m << endl;    
         }
 
+        void print_mini_map(Player p){
+            string m = "\n";
+            int x = p.get_x_coor();
+            int y = p.get_y_coor();
+            for (int i = x-1; i <= x+1; i++){
+                for (int j = y-1; j <= y+1; j++){
+                    if (x == i && y == j) {
+                        m.append("X ");
+                        continue;
+                    }
+                    else if (content[i][j].get_walkable()){
+                        m.append("o ");
+                        continue;
+                    }
+                    m.append("- ");
+                }
+                m.append("\n");
+            }
+            cout << m << endl;
+        }
+
         Map(string map_name){
             make_map(map_name);
         }
