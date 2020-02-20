@@ -60,8 +60,8 @@ int main() {
     // Map map1("map_01");
     // map1.print_map();
     Map world_map("map_02");
-    world_map.print_map();
     // options(world_map, 2, 1);
-    cout << world_map.get_block(3,3).get_has_enemy() << endl;
+    
+
     return 0;
 }

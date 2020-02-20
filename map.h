@@ -107,7 +107,7 @@ class Map {
             }
             cout << m << endl;    
         }
-
+        
         Map(string map_name){
             make_map(map_name);
         }

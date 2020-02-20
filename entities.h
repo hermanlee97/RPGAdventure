@@ -20,6 +20,7 @@ class Entity{
         int defence;
         int gold;
         int xp;
+        int steps;
 
     public:
         void set_x_coor(int x){x_coor = x;}
@@ -30,6 +31,7 @@ class Entity{
         void set_defence(int c){defence = c;}
         void set_gold(int d){gold = d;}
         void set_xp(int e){xp = e;}
+        void set_steps(int f){steps = f;}
 
         int get_x_coor(){return x_coor;}
         int get_y_coor(){return y_coor;}
@@ -39,6 +41,7 @@ class Entity{
         int get_defence(){return defence;}
         int get_gold(){return gold;}
         int get_xp(){return xp;}
+        int get_steps(){return steps;}
 
 };
 
@@ -59,13 +62,26 @@ class Player : public Entity{
             set_defence(c);
             set_gold(d);
             set_xp(e);
+            set_steps(0);
         }
 
         // movement
-        void move_up(){set_x_coor(get_x_coor()-1);}
-        void move_down(){set_x_coor(get_x_coor()+1);}
-        void move_left(){set_y_coor(get_y_coor()-1);}
-        void move_right(){set_y_coor(get_y_coor()+1);}
+        void move_up(){
+            set_x_coor(get_x_coor()-1);
+            set_steps(get_steps()+1);
+            }
+        void move_down(){
+            set_x_coor(get_x_coor()+1);
+            set_steps(get_steps()+1);
+        }
+        void move_left(){
+            set_y_coor(get_y_coor()-1);
+            set_steps(get_steps()+1);
+        }
+        void move_right(){
+            set_y_coor(get_y_coor()+1);
+            set_steps(get_steps()+1);
+        }
 
         // win
         void win(int h, int g, int x){
@@ -100,7 +116,6 @@ class Player : public Entity{
         }
 
         // inventory
-
         void add_item(Equipment item){
             inventory.push_back(item);
         }
@@ -143,7 +158,6 @@ class Player : public Entity{
         }
 
         // armour
-
         void equip_armour(int element){
             armour_slot.push_back(inventory[element]);
             inventory.erase(inventory.begin() + element);
@@ -159,7 +173,6 @@ class Player : public Entity{
         }
 
         // weapons
-
         void equip_weapon(int element){
             weapon_slot.push_back(inventory[element]);
             inventory.erase(inventory.begin() + element);
@@ -178,17 +191,6 @@ class Player : public Entity{
 class Enemy : public Entity{
     public:
         vector<string> loot;    //change type to items when ready
-
-        //  // constructor for enemy for testing
-        // Enemy(int x, int y, int a, int b, int c, int d, int e){
-        //     set_x_coor(x);
-        //     set_y_coor(y);
-        //     set_hp(a);
-        //     set_damage(b);
-        //     set_defence(c);
-        //     set_gold(d);
-        //     set_xp(e);
-        // }
 };
 
 class Weak_Enemy : public Enemy{

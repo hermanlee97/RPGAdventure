@@ -1,2 +1,12 @@
+using namespace std;
+#include <iostream>
 
-    world_map.print_map();
+
+int main(){
+int x = 10;
+cout << x << endl;
+x = NULL;
+cout << x << endl;
+
+return 0;
+}

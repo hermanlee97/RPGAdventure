@@ -45,16 +45,22 @@ int main()
         // ## 1. Check if there is combat ##
         if (cur.get_has_enemy())
         {
-            int new_hp = combat(player, cur.get_enemy());
-            if (new_hp > 0)
+            cout << player.get_steps() << endl;
+            cout << cur.get_spawn_count() << endl;
+            if (cur.get_spawn_count() == 0 || (player.get_steps() - cur.get_spawn_count())>=10)
             {
-                player.win(new_hp, cur.get_enemy().get_gold(), cur.get_enemy().get_xp());
-                // cout << "You have " << player.get_hp() << " hp left.\n" << endl;
-            }
-            else
-            {
-                player.lose();
-                continue;
+                int new_hp = combat(player, cur.get_enemy());
+                if (new_hp > 0)
+                {
+                    player.win(new_hp, cur.get_enemy().get_gold(), cur.get_enemy().get_xp());
+                    cur.set_spawn_count(player.get_steps());
+                    // cout << "You have " << player.get_hp() << " hp left.\n" << endl;
+                }
+                else
+                {
+                    player.lose();
+                    continue;
+                }
             }
         }
 
