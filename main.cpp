@@ -28,10 +28,10 @@ int main()
     Player player(0, 0, 10, 5, 2, 0, 0);
 
     // test items
-    Equipment test_armour("Test Armour", 0, 2);
-    Equipment test_sword("Test Sword", 1, 0);
-    player.add_item(test_armour);
-    player.add_item(test_sword);
+    Armour *test_armour = new Armour("Test Armour", 2, 5);
+    Weapon *test_sword = new Weapon("Test Sword", 1, 5);
+    player.add_armour(test_armour);
+    player.add_weapon(test_sword);
 
     string action;
     // game loop
