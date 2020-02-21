@@ -187,9 +187,10 @@ class Player : public Entity{
 };
 
 class Enemy : public Entity{
+    private:
+        Item* item;
+        vector<Item*> loot; // ready now boy
     public:
-        vector<string> loot;    //change type to items when ready
-
         //  // constructor for enemy for testing
         // Enemy(int x, int y, int a, int b, int c, int d, int e){
         //     set_x_coor(x);
@@ -231,26 +232,115 @@ class Strong_Enemy : public Enemy{
 class NPC : public Entity{
     private:
         Item* item;
-        vector<Item> vendor;
+        Armour* armour;
+        Weapon* weapon;
+        vector<Item*> vendor;
     public:
+        // getter
+        Item* get_vendor_item(int element){return vendor[element];}
+
+        // adding
+
+        void add_armour(Armour* armour){
+            vendor.push_back(armour);
+        }
+
+       void add_weapon(Weapon* weapon){
+            vendor.push_back(weapon);
+        }
+
+        // generating equipment
+
+        Armour* generate_common_weapon(){
+            int random_attack;
+            int cost = random_attack * 3 - 1;
+            random_attack = rand() % 3 + 1;
+
+            Weapon *common_weapon = new Weapon("Common Weapon", random_attack, cost);
+            add_weapon(common_weapon);
+        }
+
+        void generate_rare_weapon(){
+            int random_attack;
+            int cost = random_attack * 5 - 2;
+            random_attack = rand() % 10 + 4;
+
+            Weapon *rare_weapon = new Weapon("Rare Weapon", random_attack, cost);
+            add_weapon(rare_weapon);
+        }
+
+        void generate_legendary_weapon(){
+            int random_attack;
+            int cost = random_attack * 8;
+            random_attack = rand() % 21 + 11;
+
+            Weapon *legendary_weapon = new Weapon("Legendary Weapon", random_attack, cost);
+            add_weapon(legendary_weapon);
+        }
+
+        void generate_common_armour(){
+            int random_defence;
+            int cost = random_defence * 3;
+            random_defence = rand() % 4 + 2;
+
+            Armour *common_armour = new Armour("Common Armour", random_defence, cost);
+            add_armour(common_armour);
+        }
+
+        void generate_rare_armour(){
+            int random_defence;
+            int cost = random_defence * 4;
+            random_defence = rand() % 8 + 5;
+
+            Armour *rare_armour = new Armour("Rare Armour", random_defence, cost);
+            add_armour(rare_armour);
+        }
+
+        void generate_legendary_armour(){
+            int random_defence;
+            int cost = random_defence * 5;
+            random_defence = rand() % 12 + 9;
+
+            Armour *legendary_armour = new Armour("Legendary Armour", random_defence, cost);
+            add_armour(legendary_armour);
+        }
+
         // equipment
 
         void refresh_equipment(){
-            ;
+            for(int i = 0; i < 10; i++){
+                int vendor_dice_roll = rand() % 200 + 1;
+
+                if (vendor_dice_roll <= 50 ){
+                    generate_common_armour();
+                }
+                else if (vendor_dice_roll > 51 && vendor_dice_roll <= 75 ){
+                    generate_rare_armour();
+                }
+                else if (vendor_dice_roll > 76 && vendor_dice_roll <= 100  ){
+                    generate_legendary_armour();
+                }
+                else if (vendor_dice_roll > 101 && vendor_dice_roll <= 150  ){
+                    generate_common_weapon();
+                }
+                else if (vendor_dice_roll > 151 && vendor_dice_roll <= 175  ){
+                    generate_rare_weapon();
+                }
+                else if (vendor_dice_roll > 176 && vendor_dice_roll <= 200  ){
+                    generate_legendary_weapon();
+                }
+            }
         }
 
         void list_equipment(){
-            ;
-        }
-
-        // consumables
-
-        void refresh_consumables(){
-
-        }
-
-        void list_consumables(){
-            ;
+            if(vendor.size() == 0){
+                cout << "Shop is empty." << endl;
+            }
+            else{
+                for(int i = 0; i < vendor.size(); i++){
+                    cout << i+1 << ". "  << vendor[i]->get_name() << endl;
+                }
+            }
         }
 
         // player interaction
