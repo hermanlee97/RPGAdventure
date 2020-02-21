@@ -123,10 +123,8 @@ class Player : public Entity{
         }
 
         // inventory
-<<<<<<< HEAD
-        void add_item(Equipment item){
+        void add_item(Item item){
             inventory.push_back(item);
-=======
 
         void add_armour(Armour* armour){
             inventory.push_back(armour);
@@ -134,7 +132,6 @@ class Player : public Entity{
 
        void add_weapon(Weapon* weapon){
             inventory.push_back(weapon);
->>>>>>> 0d46531f5a6e79e67aa159ea553ed0019bfa8e05
         }
 
         void remove_item(int element){
@@ -220,9 +217,7 @@ class Enemy : public Entity{
         Item* item;
         vector<Item*> loot; // ready now boy
     public:
-<<<<<<< HEAD
         vector<string> loot;    //change type to items when ready
-=======
         //  // constructor for enemy for testing
         // Enemy(int x, int y, int a, int b, int c, int d, int e){
         //     set_x_coor(x);
@@ -233,7 +228,6 @@ class Enemy : public Entity{
         //     set_gold(d);
         //     set_xp(e);
         // }
->>>>>>> 0d46531f5a6e79e67aa159ea553ed0019bfa8e05
 };
 
 class Weak_Enemy : public Enemy{
