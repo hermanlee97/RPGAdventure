@@ -126,7 +126,7 @@ class Player : public Entity{
             }
             else{
                 for(int i = 0; i < inventory.size(); i++){
-                    cout << i+1 << ". "  << inventory[i]->get_name() << endl;
+                    cout << i+1 << ". "  << inventory[i]->get_name() << ", worth " << inventory[i]->get_cost() << " gold" << endl;
                 }
             }
         }
@@ -137,7 +137,7 @@ class Player : public Entity{
                     continue;
                 }
                 else{
-                    cout << i+1 << ". "  << inventory[i]->get_name() << endl;
+                    cout << i+1 << ". "  << inventory[i]->get_name() << ", +" << inventory[i]->get_defence() << " defence" << endl;
                 }
             }
         }
@@ -148,7 +148,7 @@ class Player : public Entity{
                     continue;
                 }
                 else{
-                    cout << i+1 << ". "  << inventory[i]->get_name() << endl;
+                    cout << i+1 << ". "  << inventory[i]->get_name() << ", +" << inventory[i]->get_attack() << " attack" << endl;
                 }
             }
         }
@@ -163,19 +163,29 @@ class Player : public Entity{
         }
 
         void unequip_armour(int element){
-            int new_defence = get_defence() - armour_slot[0]->get_defence();
-            set_defence(new_defence);
-            inventory.push_back(armour_slot[element]);
-            armour_slot.erase(armour_slot.begin() + element);
+            if (armour_slot.size() == 0){
+                cout << "There is nothing to unequip." << endl;
+            }
+            else {
+                int new_defence = get_defence() - armour_slot[0]->get_defence();
+                set_defence(new_defence);
+                inventory.push_back(armour_slot[element]);
+                armour_slot.erase(armour_slot.begin() + element);
+            }
         }
 
         // weapons
 
         void equip_weapon(int element){
-            weapon_slot.push_back(inventory[element]);
-            inventory.erase(inventory.begin() + element);
-            int new_damage = get_damage() + weapon_slot[0]->get_attack();
-            set_damage(new_damage);
+            if (armour_slot.size() == 0){
+                cout << "There is nothing to unequip." << endl;
+            }
+            else {
+                weapon_slot.push_back(inventory[element]);
+                inventory.erase(inventory.begin() + element);
+                int new_damage = get_damage() + weapon_slot[0]->get_attack();
+                set_damage(new_damage);
+            }
         }
 
         void unequip_weapon(int element){
@@ -251,9 +261,9 @@ class NPC : public Entity{
 
         // generating equipment
 
-        Armour* generate_common_weapon(){
+        void generate_common_weapon(){
             int random_attack;
-            int cost = random_attack * 3 - 1;
+            int cost = random_attack * 3 + 1;
             random_attack = rand() % 3 + 1;
 
             Weapon *common_weapon = new Weapon("Common Weapon", random_attack, cost);
@@ -262,7 +272,7 @@ class NPC : public Entity{
 
         void generate_rare_weapon(){
             int random_attack;
-            int cost = random_attack * 5 - 2;
+            int cost = random_attack * 5 + 2;
             random_attack = rand() % 10 + 4;
 
             Weapon *rare_weapon = new Weapon("Rare Weapon", random_attack, cost);

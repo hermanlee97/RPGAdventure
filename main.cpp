@@ -28,8 +28,8 @@ int main()
     Player player(0, 0, 10, 5, 2, 0, 0);
 
     // test items
-    Armour *test_armour = new Armour("Test Armour", 2, 5);
-    Weapon *test_sword = new Weapon("Test Sword", 1, 5);
+    Armour *test_armour = new Armour("Test Armour", 100, 5);
+    Weapon *test_sword = new Weapon("Test Sword", 100, 5);
     player.add_armour(test_armour);
     player.add_weapon(test_sword);
 
@@ -38,6 +38,7 @@ int main()
     while (true)
     {
         system("CLS");
+        
         Block cur = world_map.get_block(player.get_x_coor(), player.get_y_coor());
         cout << "You are now at (" << player.get_x_coor() << "," << player.get_y_coor() << "). \n"
              << endl;
