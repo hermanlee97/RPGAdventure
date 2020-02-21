@@ -13,11 +13,10 @@
 using namespace std;
 
 class Map {
-    // private:
-        
+    private:
+        vector<vector<Block> > content;
 
     public:
-        vector<vector<Block> > content;
         // get full map content
         vector<vector<Block> > get_content(){return content;}
 
@@ -98,6 +97,25 @@ class Map {
             string m = "\n";
             for (int i = 0; i < content.size(); i++){
                 for (int j = 0; j < content[i].size(); j++){
+                    if (p.get_x_coor() == i && p.get_y_coor() == j) {
+                        m.append("X ");
+                        continue;
+                    }
+                    else if (content[i][j].get_walkable()){
+                        m.append("o ");
+                        continue;
+                    }
+                    m.append("- ");
+                }
+                m.append("\n");
+            }
+            cout << m << endl;    
+        }
+
+        void print_mini_map(Player p){
+            string m = "\n";
+            for (int i = p.get_y_coor()-1; i <= p.get_y_coor()+1; i++){
+                for (int j = p.get_x_coor()-1; j <= p.get_x_coor()+1; j++){
                     if (p.get_x_coor() == i && p.get_y_coor() == j) {
                         m.append("X ");
                         continue;

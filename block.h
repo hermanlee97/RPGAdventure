@@ -46,7 +46,6 @@ class Block{
         }
 
         Block(int x, int y, bool w) {
-            cout << "block constructor" << endl;
             set_x_coor(x);
             set_y_coor(y);
             set_walkable(w);
