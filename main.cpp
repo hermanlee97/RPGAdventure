@@ -24,7 +24,7 @@ int main()
         return 0;
     }
 
-    Map world_map("map_02");
+    Map world_map("map_01");
     Player player(0, 0, 10, 5, 2, 0, 0);
 
     // test items

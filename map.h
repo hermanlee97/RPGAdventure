@@ -65,9 +65,13 @@ class Map {
                 int x_coor = str_to_int(split_string[0]);
                 int y_coor = str_to_int(split_string[1]);
                 bool walkable = str_to_bool(split_string[2]);
-                bool npc = str_to_bool(split_string[3]);
+                // bool npc = str_to_bool(split_string[3]);
 
-                Block b(x_coor, y_coor, walkable, npc);
+                Block b(x_coor, y_coor, walkable);
+
+                if (split_string[3] == "npc"){
+                    b.set_npc(NPC(0,0,100,100,100,0,0));
+                }
 
                 if (split_string[4] == "weak enemy"){
                     b.set_enemy(Weak_Enemy(x_coor, y_coor));
