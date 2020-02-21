@@ -43,9 +43,7 @@ class Block{
         // void set_has_player(bool x){has_player = x;}
         void set_spawn_count(int s){
             spawn_count = s;
-            cout << "S:" << s << endl;
-            cout << "Spawn Count: " << spawn_count <<endl;
-            }
+        }
 
         Block(int x, int y, bool w) {
             cout << "block constructor" << endl;

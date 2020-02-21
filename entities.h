@@ -7,6 +7,8 @@
 #include <windows.h>
 #include "items.h"
 
+using namespace std;
+
 // #### Entites Class ####
 class Entity{
     private:
@@ -93,7 +95,7 @@ class Player : public Entity{
             set_hp(h);
             set_gold(get_gold()+g);
             set_xp(get_xp()+x);
-            cout << "You gained " << g << " gold and " << x << " xp.\n" << endl;
+            std::cout << "You gained " << g << " gold and " << x << " xp.\n" << std::endl;
         }
 
         // lose
@@ -104,25 +106,26 @@ class Player : public Entity{
             if (get_gold()!=0) {
                 set_gold(get_gold()-1);
             }
-            cout << "You lost 1 gold and will be reborn at start location.\n" << endl;
-            cout << "Enter anything to reborn." << endl;
+            std::cout << "You lost 1 gold and will be reborn at start location.\n" <<std::endl;
+            std::cout << "Enter anything to reborn." << std::endl;
             string nothing;
-            cin >> nothing;
+            std::cin >> nothing;
         }
 
         // display
         void display_stat() {
-            cout << "\nCo-ordinates: (" << get_x_coor() << "," << get_y_coor() << ")" << endl;
-            cout << "HP: " << get_hp() << "/" << get_max_hp() << endl;
-            cout << "Attack: " << get_damage() << endl;
-            cout << "Defence: " << get_defence() << endl;
-            cout << "Gold: " << get_gold() << endl;
-            cout << "XP: " << get_xp() << "\n" << endl;
+            std::cout << "\nCo-ordinates: (" << get_x_coor() << "," << get_y_coor() << ")" << std::endl;
+            std::cout << "HP: " << get_hp() << "/" << get_max_hp() << std::endl;
+            std::cout << "Attack: " << get_damage() << std::endl;
+            std::cout << "Defence: " << get_defence() << std::endl;
+            std::cout << "Gold: " << get_gold() << std::endl;
+            std::cout << "XP: " << get_xp() << "\n" << std::endl;
         }
 
         // inventory
-        void add_item(Item item){
+        void add_item(Item* item){
             inventory.push_back(item);
+        }
 
         void add_armour(Armour* armour){
             inventory.push_back(armour);
@@ -215,7 +218,6 @@ class Enemy : public Entity{
         Item* item;
         vector<Item*> loot; // ready now boy
     public:
-        vector<string> loot;    //change type to items when ready
         //  // constructor for enemy for testing
         // Enemy(int x, int y, int a, int b, int c, int d, int e){
         //     set_x_coor(x);
