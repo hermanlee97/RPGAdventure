@@ -28,18 +28,23 @@ int main()
     Player player(0, 0, 10, 5, 2, 0, 0);
 
     // test items
-    Equipment test_armour("Test Armour", 0, 2);
-    Equipment test_sword("Test Sword", 1, 0);
-    player.add_item(test_armour);
-    player.add_item(test_sword);
+    Armour *test_armour = new Armour("Test Armour", 100, 5);
+    Weapon *test_sword = new Weapon("Test Sword", 100, 5);
+    player.add_armour(test_armour);
+    player.add_weapon(test_sword);
 
     string action;
     // game loop
     while (true)
     {
         system("CLS");
+<<<<<<< HEAD
         // Block cur = world_map.get_block(player.get_x_coor(), player.get_y_coor());
         Block& cur = world_map.content[player.get_x_coor()][player.get_y_coor()];
+=======
+        
+        Block cur = world_map.get_block(player.get_x_coor(), player.get_y_coor());
+>>>>>>> 0d46531f5a6e79e67aa159ea553ed0019bfa8e05
         cout << "You are now at (" << player.get_x_coor() << "," << player.get_y_coor() << "). \n"
              << endl;
 

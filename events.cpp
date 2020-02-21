@@ -92,7 +92,7 @@ std::string options(Map map, Block cur, Player player){
             player.list_armour();
             cout << "Choose an item to equip." << endl;
             cin >> intchoice;
-            if (player.inventory[intchoice -1].get_defence() == 0){
+            if (player.get_inventory_item(intchoice - 1)->get_defence() == 0){
                 cout << "That item has no defence." << endl;
             }
             else{
@@ -108,7 +108,7 @@ std::string options(Map map, Block cur, Player player){
             player.list_weapon();
             cout << "Choose an item to equip." << endl;
             cin >> intchoice;
-            if (player.inventory[intchoice -1].get_attack() == 0){
+            if (player.get_inventory_item(intchoice - 1)->get_defence() == 0){
                 cout << "That item has no attack." << endl;
             }
             else{

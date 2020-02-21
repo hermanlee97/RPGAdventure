@@ -12,49 +12,72 @@ using namespace std;
 class Item{
     private:
         string name;
-        int attack;
-        int defence;
-
-        static int num_of_items;
+        int cost;
     public:
+        virtual ~Item() {};   // virtual deconstructor for deletion
+
         void set_name(string input){name = input;}
-        void set_attack(int input){attack = input;}
-        void set_defence(int input){defence = input;}
-
+        void set_cost(int input){cost = input;}
         string get_name(){return name;}
-        int get_attack(){return attack;}
-        int get_defence(){return defence;}
+        int get_cost(){return cost;}
 
+        // virtual functions for subclasses
+        virtual string get_subclass() {};
+
+        virtual void Consume() {};
+
+        virtual void set_attack(int input) {};
+        virtual int get_attack() {};
+
+        virtual void set_defence(int input) {};
+        virtual int get_defence() {};
 };
 
 class Consumable : public Item{
     public:
-        void Consume(){;}
+        virtual void Consume(){;}
 };
 
-class Equipment : public Item{
+class Weapon : public Item{
+    private:
+        int attack;
     public:
+        virtual void set_attack(int input){attack = input;}
+        virtual int get_attack(){return attack;}
+        virtual string get_subclass(){return "weapon";}
 
-        // constructor
-        Equipment(string a, int b, int c){
-            set_name(a);
-            set_attack(b);
-            set_defence(c);
-        }
-        Equipment(){
-            set_name("");
-            set_attack(0);
-            set_defence(0);
-        }
-
+    // constructor
+    Weapon(string a, int b, int c){
+        set_name(a);
+        set_attack(b);
+        set_cost(c);
+    }
+    Weapon(){
+        set_name("");
+        set_attack(0);
+        set_cost(0);
+    }
 };
 
-// class Weapon : public Equipment{
+class Armour : public Item{
+    private:
+        int defence;
+    public:
+        virtual void set_defence(int input){defence = input;}
+        virtual int get_defence(){return defence;}
+        virtual string get_subclass(){return "armour";}
 
-// };
-
-// class Armour : public Equipment{
-
-// };
+    // constructor
+    Armour(string a, int b, int c){
+        set_name(a);
+        set_defence(b);
+        set_cost(c);
+    }
+    Armour(){
+        set_name("");
+        set_defence(0);
+        set_cost(0);
+    }
+};
 
 #endif
