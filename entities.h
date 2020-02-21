@@ -276,57 +276,55 @@ class NPC : public Entity{
             vendor.push_back(weapon);
         }
 
+        void remove_item(int element){
+            vendor.erase(vendor.begin() + element);
+        }
+
         // generating equipment
 
         void generate_common_weapon(){
-            int random_attack;
+            int random_attack = rand() % 3 + 1;
             int cost = random_attack * 3 + 1;
-            random_attack = rand() % 3 + 1;
 
             Weapon *common_weapon = new Weapon("Common Weapon", random_attack, cost);
             add_weapon(common_weapon);
         }
 
         void generate_rare_weapon(){
-            int random_attack;
+            int random_attack = rand() % 10 + 4;
             int cost = random_attack * 5 + 2;
-            random_attack = rand() % 10 + 4;
 
             Weapon *rare_weapon = new Weapon("Rare Weapon", random_attack, cost);
             add_weapon(rare_weapon);
         }
 
         void generate_legendary_weapon(){
-            int random_attack;
+            int random_attack = rand() % 21 + 11;
             int cost = random_attack * 8;
-            random_attack = rand() % 21 + 11;
 
             Weapon *legendary_weapon = new Weapon("Legendary Weapon", random_attack, cost);
             add_weapon(legendary_weapon);
         }
 
         void generate_common_armour(){
-            int random_defence;
+            int random_defence = rand() % 4 + 2;
             int cost = random_defence * 3;
-            random_defence = rand() % 4 + 2;
 
             Armour *common_armour = new Armour("Common Armour", random_defence, cost);
             add_armour(common_armour);
         }
 
         void generate_rare_armour(){
-            int random_defence;
+            int random_defence = rand() % 8 + 5;
             int cost = random_defence * 4;
-            random_defence = rand() % 8 + 5;
 
             Armour *rare_armour = new Armour("Rare Armour", random_defence, cost);
             add_armour(rare_armour);
         }
 
         void generate_legendary_armour(){
-            int random_defence;
+            int random_defence = rand() % 12 + 9;
             int cost = random_defence * 5;
-            random_defence = rand() % 12 + 9;
 
             Armour *legendary_armour = new Armour("Legendary Armour", random_defence, cost);
             add_armour(legendary_armour);
@@ -365,18 +363,27 @@ class NPC : public Entity{
             }
             else{
                 for(int i = 0; i < vendor.size(); i++){
-                    cout << i+1 << ". "  << vendor[i]->get_name() << endl;
+                    cout << i+1 << ". "  << vendor[i]->get_name() << ", costs " << vendor[i]->get_cost() << endl;
                 }
             }
         }
 
         // player interaction
 
-        void buy_item(Player player){
-            ;
+        void buy_item(Player player, int element){
+            if (player.get_gold() < vendor[element]->get_cost()) {
+                cout << "You don't have enough money to buy that item." << endl;
+            }
+            else if (player.get_gold() >= vendor[element]->get_cost()) {
+                player.add_item(vendor[element]);
+                remove_item(element);
+            }
+            else {
+                cout << "Invalid item." << endl;
+            }
         }
 
-        void sell_item(Player player){
+        void sell_item(Player player, int element){
             ;
         }
 

@@ -14,9 +14,10 @@ using namespace std;
 
 class Map {
     private:
-        vector<vector<Block> > content;
+        
 
     public:
+        vector<vector<Block> > content;
         // get full map content
         vector<vector<Block> > get_content(){return content;}
 
