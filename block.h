@@ -40,13 +40,14 @@ class Block{
         void set_has_npc(bool n){has_npc = n;}
         void set_enemy(Enemy e){enemy.push_back(e);}
         // void set_has_player(bool x){has_player = x;}
-        void set_spawn_count(int f){
-            spawn_count = f;
-            cout << f << endl;
-            cout << spawn_count <<endl;
+        void set_spawn_count(int s){
+            spawn_count = s;
+            cout << "S:" << s << endl;
+            cout << "Spawn Count: " << spawn_count <<endl;
             }
 
         Block(int x, int y, bool w, bool npc) {
+            cout << "block constructor" << endl;
             set_x_coor(x);
             set_y_coor(y);
             set_walkable(w);

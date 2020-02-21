@@ -13,10 +13,11 @@
 using namespace std;
 
 class Map {
-    private:
-        vector<vector<Block> > content;
+    // private:
+        
 
     public:
+        vector<vector<Block> > content;
         // get full map content
         vector<vector<Block> > get_content(){return content;}
 
@@ -107,7 +108,7 @@ class Map {
             }
             cout << m << endl;    
         }
-        
+
         Map(string map_name){
             make_map(map_name);
         }

@@ -38,7 +38,8 @@ int main()
     while (true)
     {
         system("CLS");
-        Block cur = world_map.get_block(player.get_x_coor(), player.get_y_coor());
+        // Block cur = world_map.get_block(player.get_x_coor(), player.get_y_coor());
+        Block& cur = world_map.content[player.get_x_coor()][player.get_y_coor()];
         cout << "You are now at (" << player.get_x_coor() << "," << player.get_y_coor() << "). \n"
              << endl;
 
@@ -53,12 +54,14 @@ int main()
                 if (new_hp > 0)
                 {
                     player.win(new_hp, cur.get_enemy().get_gold(), cur.get_enemy().get_xp());
+                    std::cout << "steps: " << player.get_steps() << std::endl;
                     cur.set_spawn_count(player.get_steps());
                     // cout << "You have " << player.get_hp() << " hp left.\n" << endl;
                 }
                 else
                 {
                     player.lose();
+                     cur.set_spawn_count(player.get_steps());
                     continue;
                 }
             }
