@@ -6,23 +6,21 @@
 #include <string>
 #include <windows.h>
 
-using namespace std;
-
 // #### Items Class ####
 class Item{
     private:
-        string name;
+        std::string name;
         int cost;
     public:
         virtual ~Item() {};   // virtual deconstructor for deletion
 
-        void set_name(string input){name = input;}
+        void set_name(std::string input){name = input;}
         void set_cost(int input){cost = input;}
-        string get_name(){return name;}
+        std::string get_name(){return name;}
         int get_cost(){return cost;}
 
         // virtual functions for subclasses
-        virtual string get_subclass() {};
+        virtual std::string get_subclass() {};
 
         virtual void Consume() {};
 
@@ -44,10 +42,10 @@ class Weapon : public Item{
     public:
         virtual void set_attack(int input){attack = input;}
         virtual int get_attack(){return attack;}
-        virtual string get_subclass(){return "weapon";}
+        virtual std::string get_subclass(){return "weapon";}
 
     // constructor
-    Weapon(string a, int b, int c){
+    Weapon(std::string a, int b, int c){
         set_name(a);
         set_attack(b);
         set_cost(c);
@@ -65,10 +63,10 @@ class Armour : public Item{
     public:
         virtual void set_defence(int input){defence = input;}
         virtual int get_defence(){return defence;}
-        virtual string get_subclass(){return "armour";}
+        virtual std::string get_subclass(){return "armour";}
 
     // constructor
-    Armour(string a, int b, int c){
+    Armour(std::string a, int b, int c){
         set_name(a);
         set_defence(b);
         set_cost(c);

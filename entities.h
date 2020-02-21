@@ -7,8 +7,6 @@
 #include <windows.h>
 #include "items.h"
 
-using namespace std;
-
 // #### Entites Class ####
 class Entity{
     private:
@@ -50,15 +48,15 @@ class Player : public Entity{
         Item* item;
         Armour* armour;
         Weapon* weapon;
-        vector<Item*> inventory;
-        vector<Item*> armour_slot;
-        vector<Item*> weapon_slot;
+        std::vector<Item*> inventory;
+        std::vector<Item*> armour_slot;
+        std::vector<Item*> weapon_slot;
     public:
         // getters
 
         Item* get_inventory_item(int element){return inventory[element];}
-        vector<Item*> get_armour_slot(){return armour_slot;}
-        vector<Item*> get_weapon_slot(){return weapon_slot;}
+        std::vector<Item*> get_armour_slot(){return armour_slot;}
+        std::vector<Item*> get_weapon_slot(){return weapon_slot;}
         // constructor
         Player(int x, int y, int a, int b, int c, int d, int e){
             set_x_coor(x);
@@ -76,7 +74,7 @@ class Player : public Entity{
         void move_up(){
             set_x_coor(get_x_coor()-1);
             set_steps(get_steps()+1);
-            }
+        }
         void move_down(){
             set_x_coor(get_x_coor()+1);
             set_steps(get_steps()+1);
