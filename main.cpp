@@ -25,7 +25,7 @@ int main()
     }
 
     Map world_map("map_01");
-    Player player(0, 0, 10, 5, 2, 0, 0);
+    Player player(0, 0, 10, 5, 2, 1000, 0);
 
     // test items
     Armour *test_armour = new Armour("Test Armour", 100, 5);

@@ -4,6 +4,7 @@
 #include "map.h"
 #include "entities.h"
 #include "combat.h"
+#include "shop.h"
 using namespace std;
 
 std::string options(Map map, Block cur, Player player){
@@ -79,24 +80,7 @@ std::string options(Map map, Block cur, Player player){
         // check npc option
         else if (choice == "1") {
             if (cur.get_has_npc()){
-                int buy_in_while = 0;
-                intchoice = 0;
-                while (buy_in_while != 1) {
-                    cur.get_npc().refresh_equipment();
-                    cur.get_npc().list_equipment();
-                    cout << "1. Buy    2. Sell    3. Exit" << endl;
-                    cin >> intchoice;
-                    if (intchoice == 1) {
-                        int intchoice_buy = 0;
-                        cout << "Which item would you like to buy?" << endl;
-                        cin >> intchoice_buy;
-                        cur.get_npc().buy_item(player, intchoice_buy);
-                    }
-
-                    else if (intchoice == 3) {
-                        buy_in_while = 1;
-                    }
-                }
+                player.set_gold(shop(player, cur.get_npc()));
             }
             else { cout << "There's no npc here." << endl;}
         }

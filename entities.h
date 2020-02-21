@@ -55,7 +55,7 @@ class Player : public Entity{
         std::vector<Item*> weapon_slot;
     public:
         // getters
-
+        std::vector<Item*> get_inventory(){return inventory;}
         Item* get_inventory_item(int element){return inventory[element];}
         std::vector<Item*> get_armour_slot(){return armour_slot;}
         std::vector<Item*> get_weapon_slot(){return weapon_slot;}
@@ -363,28 +363,9 @@ class NPC : public Entity{
             }
             else{
                 for(int i = 0; i < vendor.size(); i++){
-                    cout << i+1 << ". "  << vendor[i]->get_name() << ", costs " << vendor[i]->get_cost() << endl;
+                    cout << i+1 << ". "  << vendor[i]->get_name() << ", costs " << vendor[i]->get_cost() << " gold" << endl;
                 }
             }
-        }
-
-        // player interaction
-
-        void buy_item(Player player, int element){
-            if (player.get_gold() < vendor[element]->get_cost()) {
-                cout << "You don't have enough money to buy that item." << endl;
-            }
-            else if (player.get_gold() >= vendor[element]->get_cost()) {
-                player.add_item(vendor[element]);
-                remove_item(element);
-            }
-            else {
-                cout << "Invalid item." << endl;
-            }
-        }
-
-        void sell_item(Player player, int element){
-            ;
         }
 
         NPC(int x, int y, int a, int b, int c, int d, int e){
