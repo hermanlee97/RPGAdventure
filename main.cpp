@@ -38,7 +38,7 @@ int main()
     while (true)
     {
         system("CLS");
-        Block& cur = world_map.content[player.get_x_coor()][player.get_y_coor()];
+        Block& cur = world_map.get_content()[player.get_x_coor()][player.get_y_coor()];
         cout << "You are now at (" << player.get_x_coor() << "," << player.get_y_coor() << "). \n"
              << endl;
 
