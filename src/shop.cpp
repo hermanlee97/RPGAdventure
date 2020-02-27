@@ -2,7 +2,6 @@
 
 int shop(Player player, NPC npc)
 {
-    vector<Item *> tempInventory = player.get_inventory();
     int tempGold = player.get_gold();
 
     npc.refresh_equipment();
@@ -18,7 +17,6 @@ int shop(Player player, NPC npc)
         {
             int intchoice_buy = 0;
             TextWindow(6, "Which item would you like to buy?");
-            cout << "Which item would you like to buy?" << endl;
             cin >> intchoice_buy;
             if (tempGold < npc.get_vendor_item(intchoice_buy)->get_cost())
             {

@@ -25,7 +25,11 @@ int main()
     }
 
     Map world_map("map_01");
-    Player player(0, 0, 10, 5, 2, 1000, 0);
+    Skill_Tree st;
+    Player player(0, 0, 10, 5, 2, 1000, 0, st);
+
+    // for testing
+    player.set_skill_point(2);
 
     // test items
     Armour *test_armour = new Armour("Test Armour", 100, 5);
