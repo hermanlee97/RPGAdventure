@@ -7,6 +7,7 @@
 #include <windows.h>
 #include "items.h"
 #include "printingSpaces.h"
+#include "skill_tree.cpp"
 
 using namespace std;
 
@@ -55,15 +56,26 @@ private:
     std::vector<Item *> inventory;
     std::vector<Item *> armour_slot;
     std::vector<Item *> weapon_slot;
+    Skill_Tree skill_tree;
+    int skill_point;
+    vector<string> unlocked_skills;
+    vector<string> unlockable_skills;
 
 public:
+    // setters
+    void set_skill_tree(Skill_Tree st){skill_tree = st;}
+    void set_skill_point(int sp){skill_point = sp;}
     // getters
     std::vector<Item *> get_inventory() { return inventory; }
     Item *get_inventory_item(int element) { return inventory[element]; }
     std::vector<Item *> get_armour_slot() { return armour_slot; }
     std::vector<Item *> get_weapon_slot() { return weapon_slot; }
+    Skill_Tree get_skill_tree(){return skill_tree;}
+    int get_skill_point(){return skill_point;}
+    vector<string> get_unlocked_skills(){return unlocked_skills;}
+    vector<string> get_unlockable_skills(){return unlockable_skills;}
     // constructor
-    Player(int x, int y, int a, int b, int c, int d, int e)
+    Player(int x, int y, int a, int b, int c, int d, int e, Skill_Tree st)
     {
         set_x_coor(x);
         set_y_coor(y);
@@ -74,6 +86,9 @@ public:
         set_gold(d);
         set_xp(e);
         set_steps(0);
+        set_skill_tree(st);
+        add_skill("Rest");
+        set_skill_point(0);
     }
 
     // movement
@@ -250,6 +265,99 @@ public:
         set_damage(new_damage);
         inventory.push_back(weapon_slot[element]);
         weapon_slot.erase(weapon_slot.begin() + element);
+    }
+
+    // skills
+    void learn_skill(){
+        int choice;
+        if (get_unlockable_skills().size() == 0) {
+            cout << "\nThere's no new skill to learn." << endl;
+        }
+        else if (get_skill_point() > 0) {
+            while(true){
+                cout << "\nChoose a skill to learn." << endl;
+                // display all possible choices
+                cout << 0 << ". " << "cancel" << endl;
+                for (int i=1; i<=get_unlockable_skills().size(); i++){
+                    cout << i << ". " << get_unlockable_skills()[i-1] << endl;
+                }
+                    
+                cin >> choice;
+                if(choice < 0 || choice > get_unlockable_skills().size()){
+                    cout << "\ninvalid input" << endl;
+                    continue;
+                }
+                else if (choice == 0){break;}
+                else { 
+                    add_skill(get_unlockable_skills()[choice-1]);
+                    cout << "\nYou have learned " << get_unlockable_skills()[choice-1] << endl;
+                    break;
+                }
+            }
+        }
+        else { cout << "\nYou don't have enogh skill points." << endl; } 
+    }
+
+    void add_skill(string name){
+        // unlock skill in tree
+        get_skill_tree().unlock_skill(name);
+        // save unlocked skill
+        unlocked_skills.push_back(name);
+        // remove new skill from unlockable
+        // update skill point
+        set_skill_point(get_skill_point()-1);
+        // save unlockable skills
+        vector<string> unlockable = get_skill_tree().get_unlockable_skills(name);
+        for (int i=0; i<unlockable.size(); i++){
+             unlockable_skills.push_back(unlockable[i]);
+        }
+    }
+
+    void skill_in_combat(){
+        while (true) {
+            int choice;
+            cout << 0 << ". " << "cancel" << endl;
+            for (int i=1; i<=get_unlocked_skills().size(); i++){
+                cout << i << ". " << get_unlocked_skills()[i-1] << endl;
+            }
+            cin >> choice;
+            if(choice < 0 || choice > get_unlocked_skills().size()){
+                cout << "\ninvalid input" << endl;
+                continue;
+            }
+            else if (choice == 0){break;}
+            else {
+                cout << "Casting " << get_unlocked_skills()[choice-1] << endl;
+                cast_skill(get_unlocked_skills()[choice-1]);
+                break;
+            }
+
+        }
+    }
+
+    void cast_skill(string s){
+        if (s == "Rest"){cast_rest();}
+        else if (s=="Heal_1"){cast_heal_1();}
+        else if (s=="Fireball"){cast_fireball();}
+    }
+
+    void cast_rest(){
+        cout << "You sit down and rest, nothing happened." << endl;
+    }
+    void cast_heal_1(){
+        if ((get_max_hp()-get_hp())>=3){
+            set_hp(get_hp()+3);
+            cout << "You recovered 3hp." << endl;
+        }
+        else{
+            set_hp(get_max_hp());
+            cout << "You are full hp." << endl;
+            }
+    }
+
+    int cast_fireball(){
+        cout << "You shot a fireball." << endl;
+        return -5;
     }
 };
 
