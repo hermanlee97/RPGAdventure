@@ -3,6 +3,6 @@
     "code-runner.fileDirectoryAsCwd": true,
     "code-runner.runInTerminal": true,
     "code-runner.executorMap": {
-        "cpp": "cd $dir && g++ main.cpp combat.cpp events.cpp menuOrLayout.cpp -o main"
+        "cpp": "cd $dir && g++ main.cpp combat.cpp events.cpp menuOrLayout.cpp printingSpaces.cpp -o ../bin/main"
     }
 }
