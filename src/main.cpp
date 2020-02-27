@@ -24,7 +24,7 @@ int main()
         return 0;
     }
 
-    Map world_map("map_01");
+    Map world_map("map_02");
     Skill_Tree st;
     Player player(0, 0, 10, 5, 2, 1000, 0, st);
 
@@ -44,7 +44,7 @@ int main()
         system("CLS");
 
         // Using proper Function to display stuff. (2=hotbar, string to be displayed).
-        Block &cur = world_map.get_content()[player.get_x_coor()][player.get_y_coor()];
+        Block cur = world_map.get_content()[player.get_x_coor()][player.get_y_coor()];
         TextWindow(2, "X:" + to_string(player.get_x_coor()) + " Y:" + to_string(player.get_y_coor()));
 
         // ## 1. Check if there is combat ##
@@ -57,7 +57,6 @@ int main()
                 {
                     player.win(new_hp, cur.get_enemy().get_gold(), cur.get_enemy().get_xp());
                     cur.set_spawn_count(player.get_steps());
-                    // cout << "You have " << player.get_hp() << " hp left.\n" << endl;
                 }
                 else
                 {
