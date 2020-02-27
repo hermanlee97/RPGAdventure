@@ -16,9 +16,8 @@ using namespace std;
 class Map
 {
 private:
-    vector<vector<Block>> content;
-
 public:
+    vector<vector<Block>> content;
     // get full map content
     vector<vector<Block>> get_content() { return content; }
 
@@ -74,9 +73,14 @@ public:
             int x_coor = str_to_int(split_string[0]);
             int y_coor = str_to_int(split_string[1]);
             bool walkable = str_to_bool(split_string[2]);
-            bool npc = str_to_bool(split_string[3]);
+            // bool npc = str_to_bool(split_string[3]);
 
-            Block b(x_coor, y_coor, walkable, npc);
+            Block b(x_coor, y_coor, walkable);
+
+            if (split_string[3] == "npc")
+            {
+                b.set_npc(NPC(0, 0, 100, 100, 100, 0, 0));
+            }
 
             if (split_string[4] == "weak enemy")
             {
@@ -124,8 +128,31 @@ public:
             }
             m.append("\n");
         }
-        // Displays the Map at the right postion.
-        TextWindow(5, m);
+        cout << m << endl;
+    }
+
+    void print_mini_map(Player p)
+    {
+        string m = "\n";
+        for (int i = p.get_y_coor() - 1; i <= p.get_y_coor() + 1; i++)
+        {
+            for (int j = p.get_x_coor() - 1; j <= p.get_x_coor() + 1; j++)
+            {
+                if (p.get_x_coor() == i && p.get_y_coor() == j)
+                {
+                    m.append("X ");
+                    continue;
+                }
+                else if (content[i][j].get_walkable())
+                {
+                    m.append("o ");
+                    continue;
+                }
+                m.append("- ");
+            }
+            m.append("\n");
+        }
+        cout << m << endl;
     }
 
     Map(string map_name)

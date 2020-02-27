@@ -24,38 +24,43 @@ int main()
         return 0;
     }
 
-    Map world_map("map_02");
-    Player player(0, 0, 10, 5, 2, 0, 0);
+    Map world_map("map_01");
+    Player player(0, 0, 10, 5, 2, 1000, 0);
 
-    // Test items
-    Equipment test_armour("Test Armour", 0, 2);
-    Equipment test_sword("Test Sword", 1, 0);
-    player.add_item(test_armour);
-    player.add_item(test_sword);
+    // test items
+    Armour *test_armour = new Armour("Test Armour", 100, 5);
+    Weapon *test_sword = new Weapon("Test Sword", 100, 5);
+    player.add_armour(test_armour);
+    player.add_weapon(test_sword);
 
     string action;
     // Game loop
     while (true)
     {
         system("CLS");
-        Block cur = world_map.get_block(player.get_x_coor(), player.get_y_coor());
 
         // Using proper Function to display stuff. (2=hotbar, string to be displayed).
+        Block &cur = world_map.get_content()[player.get_x_coor()][player.get_y_coor()];
         TextWindow(2, "X:" + to_string(player.get_x_coor()) + " Y:" + to_string(player.get_y_coor()));
 
         // ## 1. Check if there is combat ##
         if (cur.get_has_enemy())
         {
-            int new_hp = combat(player, cur.get_enemy());
-            if (new_hp > 0)
+            if (cur.get_spawn_count() == 0 || (player.get_steps() - cur.get_spawn_count()) >= 10)
             {
-                player.win(new_hp, cur.get_enemy().get_gold(), cur.get_enemy().get_xp());
-                // cout << "You have " << player.get_hp() << " hp left.\n" << endl;
-            }
-            else
-            {
-                player.lose();
-                continue;
+                int new_hp = combat(player, cur.get_enemy());
+                if (new_hp > 0)
+                {
+                    player.win(new_hp, cur.get_enemy().get_gold(), cur.get_enemy().get_xp());
+                    cur.set_spawn_count(player.get_steps());
+                    // cout << "You have " << player.get_hp() << " hp left.\n" << endl;
+                }
+                else
+                {
+                    player.lose();
+                    cur.set_spawn_count(player.get_steps());
+                    continue;
+                }
             }
         }
 

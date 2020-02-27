@@ -12,15 +12,7 @@ std::string options(Map map, Block cur, Player player)
         // ask for user input
         string choice;
         int intchoice;
-
-        // cout << "W: move up    A: move left    S: move down    D: move right\n";
-        // cout << "1: talk to npc    2: list inventory\n";
-        // cout << "3: equip armour    4: unequip armour\n";
-        // cout << "5: equip weapon    6: unequip weapon\n";
-        // cout << "9: display stats    0: open world map" << endl;
-
         TextWindow(1, "W: move up A: move left\nS: move down D: move right\n1: talk to npc 2: list inventory\n3: equip armour 4: unequip armour\n5: equip weapon 6: unequip weapon\n9: display stats 0: open world");
-
         cin >> choice;
 
         // going left
@@ -116,7 +108,7 @@ std::string options(Map map, Block cur, Player player)
         {
             if (cur.get_has_npc())
             {
-                TextWindow(7, "You've talked to the npc.");
+                player.set_gold(shop(player, cur.get_npc()));
             }
             else
             {
@@ -134,9 +126,9 @@ std::string options(Map map, Block cur, Player player)
             player.list_armour();
             TextWindow(7, "Choose an item to equip.");
             cin >> intchoice;
-            if (player.inventory[intchoice - 1].get_defence() == 0)
+            if (player.get_inventory_item(intchoice - 1)->get_defence() == 0)
             {
-                TextWindow(7, "There's no npc here.");
+                TextWindow(7, "That item has no defence.");
             }
             else
             {
@@ -152,9 +144,9 @@ std::string options(Map map, Block cur, Player player)
         else if (choice == "5")
         {
             player.list_weapon();
-            TextWindow(7, "There's no npc here.");
+            TextWindow(7, "Choose an item to equip.");
             cin >> intchoice;
-            if (player.inventory[intchoice - 1].get_attack() == 0)
+            if (player.get_inventory_item(intchoice - 1)->get_defence() == 0)
             {
                 TextWindow(7, "That item has no attack.");
             }

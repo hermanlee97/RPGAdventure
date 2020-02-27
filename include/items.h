@@ -6,55 +6,87 @@
 #include <string>
 #include <windows.h>
 
-using namespace std;
-
 // #### Items Class ####
-class Item{
-    private:
-        string name;
-        int attack;
-        int defence;
+class Item
+{
+private:
+    std::string name;
+    int cost;
 
-        static int num_of_items;
-    public:
-        void set_name(string input){name = input;}
-        void set_attack(int input){attack = input;}
-        void set_defence(int input){defence = input;}
+public:
+    virtual ~Item(){}; // virtual deconstructor for deletion
 
-        string get_name(){return name;}
-        int get_attack(){return attack;}
-        int get_defence(){return defence;}
+    void set_name(std::string input) { name = input; }
+    void set_cost(int input) { cost = input; }
+    std::string get_name() { return name; }
+    int get_cost() { return cost; }
 
+    // virtual functions for subclasses
+    virtual std::string get_subclass() { return ""; };
+
+    virtual void Consume(){};
+
+    virtual void set_attack(int input){};
+    virtual int get_attack() { return 0; };
+
+    virtual void set_defence(int input){};
+    virtual int get_defence() { return 0; };
 };
 
-class Consumable : public Item{
-    public:
-        void Consume(){;}
+class Consumable : public Item
+{
+public:
+    virtual void Consume() { ; }
 };
 
-class Equipment : public Item{
-    public:
+class Weapon : public Item
+{
+private:
+    int attack;
 
-        // constructor
-        Equipment(string a, int b, int c){
-            set_name(a);
-            set_attack(b);
-            set_defence(c);
-        }
-        Equipment(){
-            set_name("");
-            set_attack(0);
-            set_defence(0);
-        }
+public:
+    virtual void set_attack(int input) { attack = input; }
+    virtual int get_attack() { return attack; }
+    virtual std::string get_subclass() { return "weapon"; }
 
+    // constructor
+    Weapon(std::string a, int b, int c)
+    {
+        set_name(a);
+        set_attack(b);
+        set_cost(c);
+    }
+    Weapon()
+    {
+        set_name("");
+        set_attack(0);
+        set_cost(0);
+    }
 };
 
-// class Weapon : public Equipment{
+class Armour : public Item
+{
+private:
+    int defence;
 
-// };
+public:
+    virtual void set_defence(int input) { defence = input; }
+    virtual int get_defence() { return defence; }
+    virtual std::string get_subclass() { return "armour"; }
 
-// class Armour : public Equipment{
-
-// };
+    // constructor
+    Armour(std::string a, int b, int c)
+    {
+        set_name(a);
+        set_defence(b);
+        set_cost(c);
+    }
+    Armour()
+    {
+        set_name("");
+        set_defence(0);
+        set_cost(0);
+    }
+};
 
 #endif
