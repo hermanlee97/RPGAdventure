@@ -215,33 +215,19 @@ public:
 
     void unequip_armour(int element)
     {
-        if (armour_slot.size() == 0)
-        {
-            TextWindow(7, "There is nothing to unequip.");
-        }
-        else
-        {
-            int new_defence = get_defence() - armour_slot[0]->get_defence();
-            set_defence(new_defence);
-            inventory.push_back(armour_slot[element]);
-            armour_slot.erase(armour_slot.begin() + element);
-        }
+        int new_defence = get_defence() - armour_slot[0]->get_defence();
+        set_defence(new_defence);
+        inventory.push_back(armour_slot[element]);
+        armour_slot.erase(armour_slot.begin() + element);
     }
 
     // weapons
     void equip_weapon(int element)
     {
-        if (armour_slot.size() == 0)
-        {
-            TextWindow(7, "There is nothing to unequip.");
-        }
-        else
-        {
-            weapon_slot.push_back(inventory[element]);
-            inventory.erase(inventory.begin() + element);
-            int new_damage = get_damage() + weapon_slot[0]->get_attack();
-            set_damage(new_damage);
-        }
+        weapon_slot.push_back(inventory[element]);
+        inventory.erase(inventory.begin() + element);
+        int new_damage = get_damage() + weapon_slot[0]->get_attack();
+        set_damage(new_damage);
     }
 
     void unequip_weapon(int element)

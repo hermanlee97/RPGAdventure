@@ -2,7 +2,6 @@
 
 int shop(Player player, NPC npc)
 {
-    vector<Item *> tempInventory = player.get_inventory();
     int tempGold = player.get_gold();
 
     npc.refresh_equipment();
