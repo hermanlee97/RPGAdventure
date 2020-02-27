@@ -21,6 +21,7 @@ std::string options(Map map, Block cur, Player player){
         cout << "1: talk to npc    2: list inventory\n";
         cout << "3: equip armour    4: unequip armour\n";
         cout << "5: equip weapon    6: unequip weapon\n";
+        cout << "7: use skills    8.learn new skill\n";
         cout << "9: display stats    0: open world map" << endl;
         cin >> choice;
 
@@ -119,6 +120,14 @@ std::string options(Map map, Block cur, Player player){
 
         else if (choice == "6"){
             player.unequip_weapon(0);
+        }
+
+        else if (choice == "7"){
+            player.skill_in_combat();
+        }
+
+        else if (choice == "8"){
+            player.learn_skill();
         }
 
         else if (choice == "9") {
