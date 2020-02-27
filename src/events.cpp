@@ -12,7 +12,7 @@ std::string options(Map map, Block cur, Player player)
         // ask for user input
         string choice;
         int intchoice;
-        TextWindow(1, "W: move up A: move left\nS: move down D: move right\n1: talk to npc 2: list inventory\n3: equip armour 4: unequip armour\n5: equip weapon 6: unequip weapon\n9: display stats 0: open world");
+        TextWindow(1, "W: move up A: move left\nS: move down D: move right\n1: talk to npc 2: list inventory\n3: equip armour 4: unequip armour\n5: equip weapon 6: unequip weapon\n7: use skills 8: learn new skill\n9: display stats 0: open world");
         cin >> choice;
 
         // going left
@@ -159,6 +159,16 @@ std::string options(Map map, Block cur, Player player)
         else if (choice == "6")
         {
             player.unequip_weapon(0);
+        }
+
+        else if (choice == "7") 
+        {
+            player.skill_in_combat();
+        }
+
+        else if (choice == "8")
+        {
+            player.learn_skill();
         }
 
         else if (choice == "9")

@@ -261,25 +261,26 @@ public:
         int choice;
         if (get_unlockable_skills().size() == 0)
         {
-            cout << "\nThere's no new skill to learn." << endl;
+            TextWindow(0, "There's no new skill to learn.");
         }
         else if (get_skill_point() > 0)
         {
             while (true)
             {
-                cout << "\nChoose a skill to learn." << endl;
+                TextWindow(1, "Choose a skill to learn.");
                 // display all possible choices
-                cout << 0 << ". "
-                     << "cancel" << endl;
+                TextWindow(1, "0. cancel");
+                string temp;
                 for (int i = 1; i <= get_unlockable_skills().size(); i++)
                 {
-                    cout << i << ". " << get_unlockable_skills()[i - 1] << endl;
+                    temp.append(to_string(i) + ". " + get_unlockable_skills()[i - 1] + "\n");
                 }
-
+                TextWindow(1, temp);
+                // get player choice
                 cin >> choice;
                 if (choice < 0 || choice > get_unlockable_skills().size())
                 {
-                    cout << "\ninvalid input" << endl;
+                    TextWindow(4, "invalid input");
                     continue;
                 }
                 else if (choice == 0)
@@ -289,14 +290,14 @@ public:
                 else
                 {
                     add_skill(get_unlockable_skills()[choice - 1]);
-                    cout << "\nYou have learned " << get_unlockable_skills()[choice - 1] << endl;
+                    TextWindow(0, "You have learned " + get_unlockable_skills()[choice - 1]);
                     break;
                 }
             }
         }
         else
         {
-            cout << "\nYou don't have enogh skill points." << endl;
+            TextWindow(4, "You don't have enogh skill points.");
         }
     }
 
@@ -322,16 +323,17 @@ public:
         while (true)
         {
             int choice;
-            cout << 0 << ". "
-                 << "cancel" << endl;
+            TextWindow(1, "0. cancel");
+            string temp;
             for (int i = 1; i <= get_unlocked_skills().size(); i++)
             {
-                cout << i << ". " << get_unlocked_skills()[i - 1] << endl;
+                temp.append(to_string(i) + ". " + get_unlocked_skills()[i - 1] + "\n");
             }
+            TextWindow(1, temp);
             cin >> choice;
             if (choice < 0 || choice > get_unlocked_skills().size())
             {
-                cout << "\ninvalid input" << endl;
+                TextWindow(4, "invalid input");
                 continue;
             }
             else if (choice == 0)
@@ -340,7 +342,7 @@ public:
             }
             else
             {
-                cout << "Casting " << get_unlocked_skills()[choice - 1] << endl;
+                TextWindow(3, "Casting " + get_unlocked_skills()[choice - 1]);
                 cast_skill(get_unlocked_skills()[choice - 1]);
                 break;
             }
@@ -365,25 +367,26 @@ public:
 
     void cast_rest()
     {
-        cout << "You sit down and rest, nothing happened." << endl;
+        TextWindow(0, "You sit down and rest, nothing happened.");
     }
     void cast_heal_1()
     {
         if ((get_max_hp() - get_hp()) >= 3)
         {
             set_hp(get_hp() + 3);
-            cout << "You recovered 3hp." << endl;
+            TextWindow(0, "You recovered 3hp.");
         }
         else
         {
             set_hp(get_max_hp());
-            cout << "You are full hp." << endl;
+                        TextWindow(0, "You are full hp.");
+
         }
     }
 
     int cast_fireball()
     {
-        cout << "You shot a fireball." << endl;
+        TextWindow(0, "You shot a fireball.");
         return -5;
     }
 };
