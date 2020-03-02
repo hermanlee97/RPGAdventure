@@ -1,5 +1,28 @@
 #include "../include/combat.h"
 
+void has_combat(Map &map, Player &player)
+{
+    TextWindow(2, "X:" + to_string(player.get_x_coor()) + " Y:" + to_string(player.get_y_coor()));
+    if (map.get_block(player.get_x_coor(), player.get_y_coor()).get_has_enemy())
+    {
+        if (map.get_block(player.get_x_coor(), player.get_y_coor()).get_spawn_count() == -1 || (player.get_steps() - map.get_block(player.get_x_coor(), player.get_y_coor()).get_spawn_count()) >= 10)
+        {
+            int new_hp = combat(player, map.get_block(player.get_x_coor(), player.get_y_coor()).get_enemy());
+            if (new_hp > 0)
+            {
+                player.win(new_hp, map.get_block(player.get_x_coor(), player.get_y_coor()).get_enemy().get_gold(), map.get_block(player.get_x_coor(), player.get_y_coor()).get_enemy().get_xp());
+                map.update_spawn_count(player.get_x_coor(), player.get_y_coor(), player.get_steps());
+                TextWindow(7, to_string(map.get_block(player.get_x_coor(), player.get_y_coor()).get_spawn_count()));
+            }
+            else
+            {
+                player.lose();
+            }
+        }
+    }
+}
+    
+
 int combat(Player &player, Enemy enemy)
 {
     int pHP = player.get_hp();

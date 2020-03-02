@@ -1,11 +1,11 @@
 #include "../include/events.h"
 
-std::string options(Map map, Block cur, Player &player)
+std::string options(Map map, Player &player)
 {
 
-    int x = cur.get_x_coor();
-    int y = cur.get_y_coor();
-    // bool valid = false;
+    int x = player.get_x_coor();
+    int y = player.get_y_coor();
+    Block cur = map.get_block(x,y);
 
     while (true)
     {

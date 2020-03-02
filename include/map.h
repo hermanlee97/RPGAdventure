@@ -155,6 +155,8 @@ public:
         cout << m << endl;
     }
 
+    void update_spawn_count(int x, int y, int new_count){ content[x][y].set_spawn_count(new_count); }
+
     Map(string map_name)
     {
         make_map(map_name);

@@ -40,16 +40,15 @@ class Block{
         void set_walkable(bool w){walkable = w;}
         void set_npc(NPC n){npc.push_back(n);}
         void set_enemy(Enemy e){enemy.push_back(e);}
-        // void set_has_player(bool x){has_player = x;}
         void set_spawn_count(int s){
             spawn_count = s;
         }
-
+        
         Block(int x, int y, bool w) {
             set_x_coor(x);
             set_y_coor(y);
             set_walkable(w);
-            set_spawn_count(0);
+            set_spawn_count(-1);
         }
 
 };

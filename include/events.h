@@ -12,6 +12,6 @@
 #include "printingSpaces.h"
 
 using namespace std;
-std::string options(Map map, Block cur, Player& player);
+std::string options(Map map, Player& player);
 
 #endif
