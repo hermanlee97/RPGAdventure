@@ -6,6 +6,6 @@
 
 using namespace std;
 
-int combat(Player player, Enemy enemy);
+int combat(Player& player, Enemy enemy);
 
 #endif

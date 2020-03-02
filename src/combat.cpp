@@ -1,6 +1,6 @@
 #include "../include/combat.h"
 
-int combat(Player player, Enemy enemy)
+int combat(Player &player, Enemy enemy)
 {
     int pHP = player.get_hp();
     int nHP = enemy.get_hp();

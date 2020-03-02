@@ -1,6 +1,6 @@
 #include "../include/events.h"
 
-std::string options(Map map, Block cur, Player player)
+std::string options(Map map, Block cur, Player &player)
 {
 
     int x = cur.get_x_coor();
@@ -108,7 +108,8 @@ std::string options(Map map, Block cur, Player player)
         {
             if (cur.get_has_npc())
             {
-                player.set_gold(shop(player, cur.get_npc()));
+                int newGold = shop(player, cur.get_npc());
+                player.set_gold(newGold);
             }
             else
             {
@@ -146,7 +147,7 @@ std::string options(Map map, Block cur, Player player)
             player.list_weapon();
             TextWindow(7, "Choose an item to equip.");
             cin >> intchoice;
-            if (player.get_inventory_item(intchoice - 1)->get_defence() == 0)
+            if (player.get_inventory_item(intchoice - 1)->get_attack() == 0)
             {
                 TextWindow(7, "That item has no attack.");
             }

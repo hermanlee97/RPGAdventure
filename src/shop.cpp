@@ -37,6 +37,7 @@ int shop(Player player, NPC npc)
         else if (intchoice == 3)
         {
             buy_in_while = 1;
+            npc.delete_items();
         }
     }
     return tempGold;

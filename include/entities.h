@@ -52,9 +52,9 @@ public:
 class Player : public Entity
 {
 private:
-    Item *item;
-    Armour *armour;
-    Weapon *weapon;
+    Item* item;
+    Armour* armour;
+    Weapon* weapon;
     std::vector<Item *> inventory;
     std::vector<Item *> armour_slot;
     std::vector<Item *> weapon_slot;
@@ -69,7 +69,7 @@ public:
     void set_skill_point(int sp) { skill_point = sp; }
     // getters
     std::vector<Item *> get_inventory() { return inventory; }
-    Item *get_inventory_item(int element) { return inventory[element]; }
+    Item* get_inventory_item(int element) { return inventory[element]; }
     std::vector<Item *> get_armour_slot() { return armour_slot; }
     std::vector<Item *> get_weapon_slot() { return weapon_slot; }
     Skill_Tree get_skill_tree() { return skill_tree; }
@@ -179,7 +179,7 @@ public:
 
             for (int i = 0; i < inventory.size(); i++)
             {
-                allTheItems += to_string(i + 1) + ". " + inventory[i]->get_name() + "\n worth " + to_string(inventory[i]->get_cost()) + " gold";
+                allTheItems += to_string(i + 1) + ". " + inventory[i]->get_name() + "\n worth " + to_string(inventory[i]->get_cost()) + " gold\n";
             }
             TextWindow(5, allTheItems);
         }
@@ -232,10 +232,15 @@ public:
 
     void unequip_armour(int element)
     {
-        int new_defence = get_defence() - armour_slot[0]->get_defence();
-        set_defence(new_defence);
-        inventory.push_back(armour_slot[element]);
-        armour_slot.erase(armour_slot.begin() + element);
+        if (armour_slot.size() == 0) {
+            TextWindow(4, "You have nothing to unequip.");
+        }
+        else {
+            int new_defence = get_defence() - armour_slot[0]->get_defence();
+            set_defence(new_defence);
+            inventory.push_back(armour_slot[element]);
+            armour_slot.erase(armour_slot.begin() + element);
+        }
     }
 
     // weapons
@@ -249,10 +254,15 @@ public:
 
     void unequip_weapon(int element)
     {
-        int new_damage = get_damage() - weapon_slot[0]->get_attack();
-        set_damage(new_damage);
-        inventory.push_back(weapon_slot[element]);
-        weapon_slot.erase(weapon_slot.begin() + element);
+        if (weapon_slot.size() == 0) {
+            TextWindow(4, "You have nothing to unequip.");
+        }
+        else {
+            int new_damage = get_damage() - weapon_slot[0]->get_attack();
+            set_damage(new_damage);
+            inventory.push_back(weapon_slot[element]);
+            weapon_slot.erase(weapon_slot.begin() + element);
+        }
     }
 
     // skills
@@ -394,7 +404,7 @@ public:
 class Enemy : public Entity
 {
 private:
-    Item *item;
+    Item* item;
     vector<Item *> loot; // ready now boy
 public:
     //  // constructor for enemy for testing
@@ -442,14 +452,15 @@ public:
 class NPC : public Entity
 {
 private:
-    Item *item;
-    Armour *armour;
-    Weapon *weapon;
+    Item* item;
+    Armour* armour;
+    Weapon* weapon;
     vector<Item *> vendor;
 
 public:
     // getter
-    Item *get_vendor_item(int element) { return vendor[element]; }
+    std::vector<Item*> get_vendor() {return vendor;}
+    Item* get_vendor_item(int element) { return vendor[element]; }
 
     // adding
 
@@ -575,6 +586,14 @@ public:
             }
         }
         TextWindow(5, allTheItems);
+    }
+
+    void delete_items()
+    {
+        for(int i=0; i < vendor.size(); i++)
+        {
+            delete vendor[i];
+        }
     }
 
     NPC(int x, int y, int a, int b, int c, int d, int e)
