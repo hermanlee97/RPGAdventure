@@ -1,6 +1,6 @@
 #include "../include/shop.h"
 
-int shop(Player player, NPC npc)
+int shop(Player &player, NPC npc)
 {
     int tempGold = player.get_gold();
 

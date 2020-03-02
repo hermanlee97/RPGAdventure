@@ -582,7 +582,7 @@ public:
         {
             for (int i = 0; i < vendor.size(); i++)
             {
-                allTheItems += to_string(i + 1) + ". " + vendor[i]->get_name() + ", costs" + to_string(vendor[i]->get_cost()) + " gold.";
+                allTheItems += to_string(i + 1) + ". " + vendor[i]->get_name() + ", costs " + to_string(vendor[i]->get_cost()) + " gold.\n";
             }
         }
         TextWindow(5, allTheItems);
