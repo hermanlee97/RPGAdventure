@@ -44,7 +44,10 @@ int main()
         system("CLS");
 
         // ## 1. Check if there is combat ##
-        has_combat(world_map, player);
+        if (has_combat(world_map, player))
+        {
+            combat(world_map, player, world_map.get_block(player.get_x_coor(), player.get_y_coor()).get_enemy());
+        }
 
         // ## 2. Event Presented + other options ##
         action = options(world_map, player);

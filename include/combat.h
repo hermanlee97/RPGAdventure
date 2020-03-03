@@ -7,11 +7,11 @@
 
 using namespace std;
 
-void combat(Player &player, Enemy enemy);
+void combat(Map &map, Player &player, Enemy enemy);
 void playerTurn(Player &player,Enemy &enemy);
 int getAttackTurn(int pspeed, int espeed);
 void enemyTurn(Player &player,Enemy enemy);
 int playerAttack(Player player,Enemy enemy);
-void has_combat(Map& map, Player& player);
+bool has_combat(Map& map, Player& player);
 
 #endif

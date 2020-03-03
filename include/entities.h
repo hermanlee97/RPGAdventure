@@ -255,9 +255,8 @@ public:
     }
 
     // win
-    void win(int h, int g, int x)
+    void win(int g, int x)
     {
-        set_hp(h);
         set_gold(get_gold() + g);
         set_xp(get_xp() + x);
         TextWindow(6, "You've gained " + to_string(g) + " gold\nand " + to_string(x) + " xp.");
