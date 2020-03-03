@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 #include <windows.h>
 #include "items.h"
 
@@ -26,6 +27,7 @@ private:
     int gold;
     int xp;
     int steps;
+    map<string,int> buffs;
 
 public:
     void set_x_coor(int x) { x_coor = x; }
@@ -47,6 +49,7 @@ public:
     int get_gold() { return gold; }
     int get_xp() { return xp; }
     int get_steps() { return steps; }
+    map<string,int> get_buffs() { return buffs; }
 };
 
 class Player : public Entity
@@ -67,6 +70,7 @@ public:
     // setters
     void set_skill_tree(Skill_Tree st) { skill_tree = st; }
     void set_skill_point(int sp) { skill_point = sp; }
+    void set_unlockable_skills(vector<string> us) { unlockable_skills = us; }
     // getters
     std::vector<Item *> get_inventory() { return inventory; }
     Item* get_inventory_item(int element) { return inventory[element]; }
@@ -89,8 +93,8 @@ public:
         set_xp(e);
         set_steps(0);
         set_skill_tree(st);
+        set_skill_point(1);
         add_skill("Rest");
-        set_skill_point(0);
     }
 
     // movement
@@ -271,21 +275,20 @@ public:
         int choice;
         if (get_unlockable_skills().size() == 0)
         {
-            TextWindow(0, "There's no new skill to learn.");
+            TextWindow(5, "There's no new skill to learn.");
         }
         else if (get_skill_point() > 0)
         {
             while (true)
             {
-                TextWindow(1, "Choose a skill to learn.");
                 // display all possible choices
-                TextWindow(1, "0. cancel");
                 string temp;
+                temp.append("Choose a skill to learn.\n0. cancel\n");
                 for (int i = 1; i <= get_unlockable_skills().size(); i++)
                 {
                     temp.append(to_string(i) + ". " + get_unlockable_skills()[i - 1] + "\n");
                 }
-                TextWindow(1, temp);
+                TextWindow(5, temp);
                 // get player choice
                 cin >> choice;
                 if (choice < 0 || choice > get_unlockable_skills().size())
@@ -299,8 +302,8 @@ public:
                 }
                 else
                 {
+                    TextWindow(6, "You have learned " + get_unlockable_skills()[choice - 1]);
                     add_skill(get_unlockable_skills()[choice - 1]);
-                    TextWindow(0, "You have learned " + get_unlockable_skills()[choice - 1]);
                     break;
                 }
             }
@@ -318,8 +321,15 @@ public:
         // save unlocked skill
         unlocked_skills.push_back(name);
         // remove new skill from unlockable
+        for (int i=0; i<unlockable_skills.size(); i++)
+        {
+            if (unlockable_skills[i] == name)
+            {
+                unlockable_skills.erase(unlockable_skills.begin()+i);
+            }
+        }
         // update skill point
-        set_skill_point(get_skill_point() - 1);
+        set_skill_point(get_skill_point()-1);
         // save unlockable skills
         vector<string> unlockable = get_skill_tree().get_unlockable_skills(name);
         for (int i = 0; i < unlockable.size(); i++)
@@ -333,13 +343,17 @@ public:
         while (true)
         {
             int choice;
-            TextWindow(1, "0. cancel");
             string temp;
+
+            // display usable skills
+            temp.append("0. cancel\n");
             for (int i = 1; i <= get_unlocked_skills().size(); i++)
             {
                 temp.append(to_string(i) + ". " + get_unlocked_skills()[i - 1] + "\n");
             }
-            TextWindow(1, temp);
+            TextWindow(5, temp);
+
+            // get player choice
             cin >> choice;
             if (choice < 0 || choice > get_unlocked_skills().size())
             {
@@ -377,27 +391,27 @@ public:
 
     void cast_rest()
     {
-        TextWindow(0, "You sit down and rest, nothing happened.");
+        TextWindow(3, "You sit down and rest, nothing happened.");
     }
     void cast_heal_1()
     {
         if ((get_max_hp() - get_hp()) >= 3)
         {
             set_hp(get_hp() + 3);
-            TextWindow(0, "You recovered 3hp.");
+            TextWindow(3, "You recovered 3hp.");
         }
         else
         {
             set_hp(get_max_hp());
-                        TextWindow(0, "You are full hp.");
+            TextWindow(3, "You are full hp.");
 
         }
     }
 
     int cast_fireball()
     {
-        TextWindow(0, "You shot a fireball.");
-        return -5;
+        TextWindow(3, "You shot a fireball.");
+        return 5;
     }
 };
 
@@ -405,18 +419,7 @@ class Enemy : public Entity
 {
 private:
     Item* item;
-    vector<Item *> loot; // ready now boy
-public:
-    //  // constructor for enemy for testing
-    // Enemy(int x, int y, int a, int b, int c, int d, int e){
-    //     set_x_coor(x);
-    //     set_y_coor(y);
-    //     set_hp(a);
-    //     set_damage(b);
-    //     set_defence(c);
-    //     set_gold(d);
-    //     set_xp(e);
-    // }
+    vector<Item *> loot;
 };
 
 class Weak_Enemy : public Enemy
