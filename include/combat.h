@@ -2,6 +2,7 @@
 #define COMBAT_H
 
 #include "entities.h"
+#include "map.h"
 #include "printingSpaces.h"
 
 using namespace std;
@@ -11,6 +12,6 @@ void playerTurn(Player &player,Enemy &enemy);
 int getAttackTurn(int pspeed, int espeed);
 void enemyTurn(Player &player,Enemy enemy);
 int playerAttack(Player player,Enemy enemy);
-
+void has_combat(Map& map, Player& player);
 
 #endif

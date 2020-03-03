@@ -1,11 +1,11 @@
 #include "../include/events.h"
 
-std::string options(Map map, Block cur, Player player)
+std::string options(Map map, Player &player)
 {
 
-    int x = cur.get_x_coor();
-    int y = cur.get_y_coor();
-    // bool valid = false;
+    int x = player.get_x_coor();
+    int y = player.get_y_coor();
+    Block cur = map.get_block(x,y);
 
     while (true)
     {
@@ -28,11 +28,13 @@ std::string options(Map map, Block cur, Player player)
                 }
                 else
                 {
+                    
                     TextWindow(7, "You can't go to the left!");
                 }
             }
             else
             {
+                
                 TextWindow(7, "There's nothing on the left!");
             }
         }
@@ -50,11 +52,13 @@ std::string options(Map map, Block cur, Player player)
                 }
                 else
                 {
+                    
                     TextWindow(7, "You can't go to the right!");
                 }
             }
             else
             {
+                
                 TextWindow(7, "There's nothing on the right!");
             }
         }
@@ -72,11 +76,13 @@ std::string options(Map map, Block cur, Player player)
                 }
                 else
                 {
+                    
                     TextWindow(7, "You can't go up!");
                 }
             }
             else
             {
+                
                 TextWindow(7, "There's nothing up there!");
             }
         }
@@ -94,11 +100,13 @@ std::string options(Map map, Block cur, Player player)
                 }
                 else
                 {
+                    
                     TextWindow(7, "You can't go down!");
                 }
             }
             else
             {
+                
                 TextWindow(7, "There's nothing down there!");
             }
         }
@@ -108,16 +116,19 @@ std::string options(Map map, Block cur, Player player)
         {
             if (cur.get_has_npc())
             {
-                player.set_gold(shop(player, cur.get_npc()));
+                int newGold = shop(player, cur.get_npc());
+                player.set_gold(newGold);
             }
             else
             {
+                
                 TextWindow(7, "There's no npc here.");
             }
         }
 
         else if (choice == "2")
         {
+            
             player.list_inventory();
         }
 
@@ -126,13 +137,22 @@ std::string options(Map map, Block cur, Player player)
             player.list_armour();
             TextWindow(7, "Choose an item to equip.");
             cin >> intchoice;
-            if (player.get_inventory_item(intchoice - 1)->get_defence() == 0)
+            if (intchoice > player.get_inventory().size())
             {
-                TextWindow(7, "That item has no defence.");
+                
+                TextWindow(7, "That item doesn't exist.");
             }
             else
             {
-                player.equip_armour(intchoice - 1);
+                if (player.get_inventory_item(intchoice - 1)->get_defence() == 0)
+                {
+                    
+                    TextWindow(7, "That item has no defence.");
+                }
+                else
+                {
+                    player.equip_armour(intchoice - 1);
+                }
             }
         }
 
@@ -144,15 +164,25 @@ std::string options(Map map, Block cur, Player player)
         else if (choice == "5")
         {
             player.list_weapon();
+            
             TextWindow(7, "Choose an item to equip.");
             cin >> intchoice;
-            if (player.get_inventory_item(intchoice - 1)->get_defence() == 0)
+            if (intchoice > player.get_inventory().size())
             {
-                TextWindow(7, "That item has no attack.");
+                
+                TextWindow(7, "That item doesn't exist.");
             }
             else
             {
-                player.equip_weapon(intchoice - 1);
+                if (player.get_inventory_item(intchoice - 1)->get_attack() == 0)
+                {
+                    
+                    TextWindow(7, "That item has no attack.");
+                }
+                else
+                {
+                    player.equip_weapon(intchoice - 1);
+                }
             }
         }
 
@@ -184,6 +214,7 @@ std::string options(Map map, Block cur, Player player)
 
         else
         {
+            
             TextWindow(7, "Invalid Input");
         }
     }

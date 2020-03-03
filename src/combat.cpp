@@ -2,7 +2,30 @@
 #include <time.h> 
 #include "../include/items.h"
 
-// int combat(Player player, Enemy enemy)
+void has_combat(Map &map, Player &player)
+{
+    TextWindow(2, "X:" + to_string(player.get_x_coor()) + " Y:" + to_string(player.get_y_coor()));
+    if (map.get_block(player.get_x_coor(), player.get_y_coor()).get_has_enemy())
+    {
+        if (map.get_block(player.get_x_coor(), player.get_y_coor()).get_spawn_count() == -1 || (player.get_steps() - map.get_block(player.get_x_coor(), player.get_y_coor()).get_spawn_count()) >= 10)
+        {
+            combat(player, map.get_block(player.get_x_coor(), player.get_y_coor()).get_enemy());
+            // if (new_hp > 0)
+            // {
+            //     player.win(new_hp, map.get_block(player.get_x_coor(), player.get_y_coor()).get_enemy().get_gold(), map.get_block(player.get_x_coor(), player.get_y_coor()).get_enemy().get_xp());
+            //     map.update_spawn_count(player.get_x_coor(), player.get_y_coor(), player.get_steps());
+            //     TextWindow(7, to_string(map.get_block(player.get_x_coor(), player.get_y_coor()).get_spawn_count()));
+            // }
+            // else
+            // {
+            //     player.lose();
+            // }
+        }
+    }
+}
+    
+
+// void combat(Player &player, Enemy enemy)
 // {
 //     int pHP = player.get_hp();
 //     int nHP = enemy.get_hp();
@@ -125,7 +148,7 @@ void enemyTurn(Player &player,Enemy enemy){
     player.set_hp(player.get_hp()-dmg);
 }
 
-void playerTurn(Player &player,Enemy &enemy){
+void playerTurn(Player &player, Enemy &enemy){
     //loop
     // display the 4 options
     // Attack use skill use items run

@@ -43,32 +43,11 @@ int main()
     {
         system("CLS");
 
-        // Using proper Function to display stuff. (2=hotbar, string to be displayed).
-        Block cur = world_map.get_content()[player.get_x_coor()][player.get_y_coor()];
-        TextWindow(2, "X:" + to_string(player.get_x_coor()) + " Y:" + to_string(player.get_y_coor()));
-
-        // // ## 1. Check if there is combat ##
-        // if (cur.get_has_enemy())
-        // {
-        //     if (cur.get_spawn_count() == 0 || (player.get_steps() - cur.get_spawn_count()) >= 10)
-        //     {
-        //         combat(player, cur.get_enemy());
-        //         if (new_hp > 0)
-        //         {
-        //             player.win(new_hp, cur.get_enemy().get_gold(), cur.get_enemy().get_xp());
-        //             cur.set_spawn_count(player.get_steps());
-        //         }
-        //         else
-        //         {
-        //             player.lose();
-        //             cur.set_spawn_count(player.get_steps());
-        //             continue;
-        //         }
-        //     }
-        // }
+        // ## 1. Check if there is combat ##
+        has_combat(world_map, player);
 
         // ## 2. Event Presented + other options ##
-        action = options(world_map, cur, player);
+        action = options(world_map, player);
 
         if (action == "left")
         {

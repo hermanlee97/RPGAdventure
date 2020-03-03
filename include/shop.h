@@ -10,6 +10,6 @@
 
 using namespace std;
 
-int shop(Player player, NPC npc);
+int shop(Player &player, NPC npc);
 
 #endif
