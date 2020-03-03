@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <map>
 #include <windows.h>
 #include "items.h"
 
@@ -27,7 +26,8 @@ private:
     int gold;
     int xp;
     int steps;
-    map<string,int> buffs;
+    vector<pair<string,int>> buffs;
+    vector<pair<string,int>> debuffs;
 
 public:
     void set_x_coor(int x) { x_coor = x; }
@@ -39,6 +39,8 @@ public:
     void set_gold(int d) { gold = d; }
     void set_xp(int e) { xp = e; }
     void set_steps(int f) { steps = f; }
+    void set_buffs(vector<pair<string,int>> g) { buffs = g; }
+    void set_debuffs(vector<pair<string,int>> h) { debuffs = h; }
 
     int get_x_coor() { return x_coor; }
     int get_y_coor() { return y_coor; }
@@ -49,7 +51,131 @@ public:
     int get_gold() { return gold; }
     int get_xp() { return xp; }
     int get_steps() { return steps; }
-    map<string,int> get_buffs() { return buffs; }
+    vector<pair<string,int>> get_buffs() { return buffs; }
+    vector<pair<string,int>> get_debuffs() { return debuffs; }
+
+    void add_buff(string name, int duration) { buffs.push_back(make_pair(name, duration)); }
+    void add_debuff(string name, int duration) { debuffs.push_back(make_pair(name, duration)); }
+
+    void update_effects() {
+        // update buffs
+        if (buffs.size() != 0) {
+            // take 1 duration off each buff and delete it if it reaches 0
+            for (int i=0;i<buffs.size();i++) { 
+                buffs[i].second-=1; 
+                if (buffs[i].second <= 0) {
+                    lose_buff(buffs[i].first);
+                    buffs.erase(buffs.begin()+i);
+                }
+            }
+        }
+        // update debuffs
+        if (debuffs.size() != 0) {
+            // take 1 duration off each debuff and delete it if it reaches 0
+            for (int i=0;i<debuffs.size();i++) { 
+                debuffs[i].second-=1; 
+                if (debuffs[i].second == 0) {
+                    lose_debuff(debuffs[i].first);
+                    debuffs.erase(debuffs.begin()+i);
+                }
+            }
+        }
+    }
+
+     void cast_rest() { TextWindow(3, "You sit down and rest, nothing happened."); }
+
+    void cast_heal_1()
+    {
+        if ((get_max_hp() - get_hp()) >= 3)
+        {
+            set_hp(get_hp() + 3);
+            TextWindow(3, "You recovered 3hp.");
+        }
+        else
+        {
+            set_hp(get_max_hp());
+            TextWindow(3, "You are full hp.");
+
+        }
+    }
+
+    int cast_fireball()
+    {
+        TextWindow(3, "You shot a fireball.");
+        // target.set_hp(target.get_hp()-5);
+        return 5;
+    }
+
+    void cast_strength()
+    {
+        TextWindow(3, "You are strengthened.");
+        add_buff("Strength", 5);
+        set_damage(get_damage()+3);
+    }
+
+    void cast_heal_2()
+    {
+        if ((get_max_hp() - get_hp()) >= 8)
+        {
+            set_hp(get_hp() + 3);
+            TextWindow(3, "You recovered 8 hp.");
+        }
+        else
+        {
+            set_hp(get_max_hp());
+            TextWindow(3, "You healed to full hp.");
+
+        }
+    }
+    
+    void cast_cleanse()
+    {
+        if (get_debuffs().size() == 0)
+        {
+            TextWindow(3, "There's nothing to cleanse.");
+        }
+        else {
+            TextWindow(3, "All debuffs are cleansed.");
+            for (int i=0;i<debuffs.size();i++) {
+                lose_debuff(debuffs[i].first);
+                debuffs.erase(debuffs.begin()+i);
+            }
+        }
+    }
+
+    int cast_freeze() 
+    {
+        TextWindow(3, "You freeze the enemy.");
+        // target.add_debuff(Freeze, 3);
+        // target.set_hp(target.get_hp()-2);
+        // target.set_speed(target.get_speed()-5);
+        return 2;
+    }
+
+    void cast_enrage()
+    {
+        TextWindow(3, "You are enraged.");
+        add_buff("Enrage", 2);
+        set_damage(get_damage()+10);
+        set_defence(get_defence()-5);
+    }
+
+    void lose_buff(string name)
+    {
+        if (name == "Strength"){ set_damage(get_damage()-3); }
+        else if (name == "Enrage")
+        {
+            set_damage(get_damage()-10);
+            set_defence(get_defence()+5);
+        }
+    }
+
+    void lose_debuff(string name)
+    {
+        if (name == "Freeze") { 
+            // set_speed(target.get_speed()+5)
+        }
+    }
 };
 
 class Player : public Entity
@@ -375,44 +501,17 @@ public:
 
     void cast_skill(string s)
     {
-        if (s == "Rest")
-        {
-            cast_rest();
-        }
-        else if (s == "Heal_1")
-        {
-            cast_heal_1();
-        }
-        else if (s == "Fireball")
-        {
-            cast_fireball();
-        }
+        if (s == "Rest") { cast_rest(); }
+        else if (s == "Heal_1") { cast_heal_1(); }
+        else if (s == "Fireball") { cast_fireball(); }
+        else if (s == "Strength") { cast_strength(); }
+        else if (s == "Heal_2") { cast_heal_2(); }
+        else if (s == "Cleanse") { cast_cleanse(); }
+        else if (s == "Freeze") { cast_freeze(); }
+        else if (s == "Enrage") { cast_enrage(); }
+        else { TextWindow(7, "Skill doesn't exist."); }
     }
 
-    void cast_rest()
-    {
-        TextWindow(3, "You sit down and rest, nothing happened.");
-    }
-    void cast_heal_1()
-    {
-        if ((get_max_hp() - get_hp()) >= 3)
-        {
-            set_hp(get_hp() + 3);
-            TextWindow(3, "You recovered 3hp.");
-        }
-        else
-        {
-            set_hp(get_max_hp());
-            TextWindow(3, "You are full hp.");
-
-        }
-    }
-
-    int cast_fireball()
-    {
-        TextWindow(3, "You shot a fireball.");
-        return 5;
-    }
 };
 
 class Enemy : public Entity
