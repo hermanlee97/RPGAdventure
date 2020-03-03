@@ -26,6 +26,9 @@ private:
     int gold;
     int xp;
     int steps;
+    int speed;
+    int crit;
+    
 
 public:
     void set_x_coor(int x) { x_coor = x; }
@@ -37,6 +40,8 @@ public:
     void set_gold(int d) { gold = d; }
     void set_xp(int e) { xp = e; }
     void set_steps(int f) { steps = f; }
+    void set_speed(int s){speed=s;}
+    void set_crit(int c){crit=c;}
 
     int get_x_coor() { return x_coor; }
     int get_y_coor() { return y_coor; }
@@ -47,6 +52,8 @@ public:
     int get_gold() { return gold; }
     int get_xp() { return xp; }
     int get_steps() { return steps; }
+    int get_speed(){return speed;}
+    int get_crit(){return crit;}
 };
 
 class Player : public Entity
@@ -62,6 +69,7 @@ private:
     int skill_point;
     vector<string> unlocked_skills;
     vector<string> unlockable_skills;
+    
 
 public:
     // setters
@@ -91,7 +99,15 @@ public:
         set_skill_tree(st);
         add_skill("Rest");
         set_skill_point(0);
+        set_crit(2);
     }
+
+    // int attack(int enemyDefence){
+
+    // }
+    // void run(int edmg){
+    //     //hp and gold
+    // }
 
     // movement
     void move_up()
@@ -132,12 +148,19 @@ public:
         set_hp(get_max_hp());
         if (get_gold() != 0)
         {
-            set_gold(get_gold() - 1);
+            set_gold(get_gold() - 5);
         }
         TextWindow(3, "You've lost 1 gold and\nwill be reborn at start location.\n");
         TextWindow(7, "Enter anything to be reborn.");
         string nothing;
         std::cin >> nothing;
+    }
+
+    //Run
+    void run(int dmg){
+        set_hp(get_hp()-dmg);
+        set_gold(get_gold()-1);
+        TextWindow(3,"You ran away but still got hit once and lost 1 gold");
     }
 
     // display

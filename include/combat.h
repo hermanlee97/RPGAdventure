@@ -6,6 +6,11 @@
 
 using namespace std;
 
-int combat(Player player, Enemy enemy);
+void combat(Player &player, Enemy enemy);
+void playerTurn(Player &player,Enemy &enemy);
+int getAttackTurn(int pspeed, int espeed);
+void enemyTurn(Player &player,Enemy enemy);
+int playerAttack(Player player,Enemy enemy);
+
 
 #endif
