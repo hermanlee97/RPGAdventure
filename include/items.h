@@ -31,6 +31,10 @@ public:
 
     virtual void set_defence(int input){};
     virtual int get_defence() { return 0; };
+
+    virtual bool get_has_upgrade() { return 0; };
+    virtual void set_has_upgrade(bool input) {};
+    virtual void upgrade_item() {};
 };
 
 class Consumable : public Item
@@ -43,11 +47,15 @@ class Weapon : public Item
 {
 private:
     int attack;
+    bool has_weapon_upgrade = 0;
 
 public:
     virtual void set_attack(int input) { attack = input; }
     virtual int get_attack() { return attack; }
     virtual std::string get_subclass() { return "weapon"; }
+    virtual bool get_has_upgrade() { return has_weapon_upgrade; }
+    virtual void set_has_upgrade(bool input) { has_weapon_upgrade == input; }
+    virtual void upgrade_item() { set_attack(attack*1.25); }
 
     // constructor
     Weapon(std::string a, int b, int c)
@@ -68,11 +76,15 @@ class Armour : public Item
 {
 private:
     int defence;
+    bool has_armour_upgrade = 0;
 
 public:
     virtual void set_defence(int input) { defence = input; }
     virtual int get_defence() { return defence; }
     virtual std::string get_subclass() { return "armour"; }
+    virtual bool get_has_upgrade() { return has_armour_upgrade; }
+    virtual void set_has_upgrade(bool input) { has_armour_upgrade == input; }
+    virtual void upgrade_item(){ set_defence( defence*1.25 ); }
 
     // constructor
     Armour(std::string a, int b, int c)

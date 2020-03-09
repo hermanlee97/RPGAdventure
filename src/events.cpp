@@ -128,8 +128,22 @@ std::string options(Map map, Player &player)
 
         else if (choice == "2")
         {
-            
             player.list_inventory();
+            TextWindow(7, "Do you want to upgrade an item?");
+            cin >> choice;
+            if (choice == "Y" || choice == "n")
+            {
+                TextWindow(7, "Which item would you like to upgrade? " + to_string(player.get_upgrade_point()) + " UP left.");
+                cin >> intchoice;
+                if ( intchoice > player.get_inventory().size())
+                {
+                    TextWindow(7, "Invalid item.");
+                }
+                else {
+                    player.upgrade_item(intchoice - 1);
+                    player.set_upgrade_point(player.get_upgrade_point() - 1);
+                }
+            }
         }
 
         else if (choice == "3")

@@ -198,7 +198,7 @@ private:
     int skill_point;
     vector<string> unlocked_skills;
     vector<string> unlockable_skills;
-    
+    int upgrade_point;
 
 public:
     // setters
@@ -214,8 +214,10 @@ public:
     int get_skill_point() { return skill_point; }
     vector<string> get_unlocked_skills() { return unlocked_skills; }
     vector<string> get_unlockable_skills() { return unlockable_skills; }
+    int get_upgrade_point(){ return upgrade_point; }
+    void set_upgrade_point(int point){ upgrade_point = point; }
     // constructor
-    Player(int x, int y, int a, int b, int c, int d, int e, Skill_Tree st)
+    Player(int x, int y, int a, int b, int c, int d, int e, int f, Skill_Tree st)
     {
         set_x_coor(x);
         set_y_coor(y);
@@ -225,6 +227,7 @@ public:
         set_defence(c);
         set_gold(d);
         set_xp(e);
+        set_upgrade_point(f);
         set_steps(0);
         set_skill_tree(st);
         set_skill_point(1);
@@ -407,6 +410,27 @@ public:
             set_damage(new_damage);
             inventory.push_back(weapon_slot[element]);
             weapon_slot.erase(weapon_slot.begin() + element);
+        }
+    }
+
+    void upgrade_item(int element)
+    {
+        if (inventory.size() == 0)
+        {
+            TextWindow(4, "You have nothing to upgrade.");
+        }
+        else {
+            if (upgrade_point == 0)
+            {
+                TextWindow(4, "You have no upgrade points left.");
+            }
+            else if (inventory[element]->get_has_upgrade() == 1) {
+                TextWindow(4, "This item has already been upgraded.");
+            }
+            else {
+                inventory[element]->upgrade_item();
+                inventory[element]->set_has_upgrade(1);
+            }
         }
     }
 
